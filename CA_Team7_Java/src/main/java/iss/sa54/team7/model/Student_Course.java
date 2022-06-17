@@ -31,11 +31,11 @@ public class Student_Course {
 	private int score;
 
     @ManyToOne
-    
+    @JoinColumn(name="studentID") 
     private Collection<Student> students;
     
     @ManyToOne
-    @JoinColumn(name="lectureID") 
+    @JoinColumn(name="courseID") 
     private Collection<Course> courses;
 
     

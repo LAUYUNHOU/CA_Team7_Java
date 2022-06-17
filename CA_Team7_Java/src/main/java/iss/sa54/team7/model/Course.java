@@ -19,12 +19,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "Course")
 @NoArgsConstructor
+@Data
 
 public class Course {
 	@Id
 	@Column(name = "courseID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String courseID;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int courseID;
 	@Column(name = "courseName")
 	private String courseName;
 	@Column(name = "courseStartDate")
@@ -38,55 +39,8 @@ public class Course {
     @OneToMany(mappedBy="lecturers") 
     private Lecturer_Course CourseLecture;
 
-	public String getCourseID() {
-		return courseID;
-	}
-
-	public void setCourseID(String courseID) {
-		this.courseID = courseID;
-	}
-
-	public String getCourseName() {
-		return courseName;
-	}
-
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
-
-	public Date getCourseStartDate() {
-		return courseStartDate;
-	}
-
-	public void setCourseStartDate(Date courseStartDate) {
-		this.courseStartDate = courseStartDate;
-	}
-
-	public Date getCourseEndDate() {
-		return courseEndDate;
-	}
-
-	public void setCourseEndDate(Date courseEndDate) {
-		this.courseEndDate = courseEndDate;
-	}
-
-	public Student_Course getCourseStudent() {
-		return CourseStudent;
-	}
-
-	public void setCourseStudent(Student_Course courseStudent) {
-		CourseStudent = courseStudent;
-	}
-
-	public Lecturer_Course getCourseLecture() {
-		return CourseLecture;
-	}
-
-	public void setCourseLecture(Lecturer_Course courseLecture) {
-		CourseLecture = courseLecture;
-	}
-
-	public Course(String courseID, String courseName, Date courseStartDate, Date courseEndDate,
+	
+	public Course(int courseID, String courseName, Date courseStartDate, Date courseEndDate,
 			Student_Course courseStudent, Lecturer_Course courseLecture) {
 		super();
 		this.courseID = courseID;
