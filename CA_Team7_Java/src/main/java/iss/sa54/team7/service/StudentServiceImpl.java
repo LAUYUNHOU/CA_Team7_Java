@@ -17,6 +17,13 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	@Transactional
+	public ArrayList<Student> findAllStudentsByCourse(Integer courseID){
+		return srepo.findAllStudentsByCourseID(courseID);
+		
+	}
+
+	@Override
+	@Transactional
 	public void removeStudent(Student student) {
 		srepo.delete(student);
 	}

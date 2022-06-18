@@ -10,5 +10,6 @@ public interface StudentService {
 	Student createStudent(Student student);
 	Student editStudent(Student student);
 	void removeStudent(Student student);
+	public ArrayList<Student> findAllStudentsByCourse(Integer courseID);
 	
 }

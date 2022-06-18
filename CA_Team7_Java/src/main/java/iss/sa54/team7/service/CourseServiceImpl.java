@@ -14,12 +14,18 @@ public class CourseServiceImpl implements CourseService {
 	@Resource
 	private CourseRepo courseRepo;
 
-	
-	 @Override
-	 @Transactional public ArrayList<Course> findAllCourses() {
-	 ArrayList<Course>list = (ArrayList<Course>) courseRepo.findAll(); 
+	@Override
+	@Transactional
+	public ArrayList<Course> findCoursesByLectID(Integer lectID) {
+		return courseRepo.findCoursesByLecturerID(lectID);
+	}
+
+	@Override
+	@Transactional 
+	public ArrayList<Course> findAllCourses() {
+	 	ArrayList<Course>list = (ArrayList<Course>) courseRepo.findAll(); 
 	 	return list; 
-	 }
+	}
 
 	@Override
 	@Transactional
