@@ -42,9 +42,12 @@ public class LecturerController {
 	}
 
 	@GetMapping("/courses/{courseID}")
-	public String viewCourseEnrolled(Model model, @PathVariable("courseID") Integer courseID){
+	public String viewCourseEnrolled(Model model, Model model2, @PathVariable("courseID") Integer courseID){
 		List<Student> slist = sService.findAllStudentsByCourse(courseID);
 		model.addAttribute("students", slist);
+		
+		Course course = cService.findCourse(courseID);
+		model2.addAttribute("courseName", course.getCourseName());
 		return "enrolment";
 	}
 
