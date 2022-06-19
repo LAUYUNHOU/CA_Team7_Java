@@ -12,7 +12,7 @@
 	   <th>Start Date</th>
 	   <th>End Date</th>
 	 </tr>
-	 <tr th:each="course:${products}">
+	 <tr th:each="course:${courses }">
 	   <td th:text="${course.courseID}">ID</td> 
 	   <td th:text="${course.courseName}">Name</td>
 	   <td th:text="${#dates.format(course.courseStartDate, 'dd-MM-yyyy')}">Start Date</td>
