@@ -1,4 +1,4 @@
-package sg.team7.model;
+package iss.sa54.team7.controller;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
