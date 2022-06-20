@@ -30,6 +30,8 @@ public class Course {
     private Date courseEndDate;
     @Column(name="courseunit")
     private int courseUnit;
+    @Column(name="maxsize")
+    private int maxSize;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private Set<Student_Course> studentCourses;
@@ -37,11 +39,12 @@ public class Course {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private Set<Lecturer_Course> lecturerCourses;
 
-    public Course(String courseName, Student_Course... studentCourses) {
+    public Course(String courseName, Date courseStartDate, Date courseEndDate, int courseUnit, int maxSize, Student_Course... studentCourses) {
         this.courseName = courseName;
         this.courseStartDate = courseStartDate;
         this.courseEndDate = courseEndDate;
         this.courseUnit = courseUnit;
+        this.maxSize = maxSize;
         for(Student_Course studentCourse : studentCourses) studentCourse.setCourse(this);
         this.studentCourses = Stream.of(studentCourses).collect(Collectors.toSet());
     }
