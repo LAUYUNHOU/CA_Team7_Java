@@ -1,4 +1,4 @@
-package sg.team7.model;
+package iss.sa54.team7.controller;
 //import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
