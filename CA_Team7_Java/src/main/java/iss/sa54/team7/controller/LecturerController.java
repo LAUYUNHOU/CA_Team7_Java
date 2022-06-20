@@ -1,6 +1,7 @@
 package iss.sa54.team7.controller;
 
 import java.util.List;
+import java.util.ArrayList;
 
 //import javax.validation.Valid;
 
@@ -50,6 +51,20 @@ public class LecturerController {
 
 	@PostMapping("/enrolment/grade")
 	public String gradeStudent(@ModelAttribute("students") Student s){
+		
+		return "enrolment";
+	}
+	
+	@GetMapping("/enrolment/grade")
+	public String gradeList(Model model) {
+		List<String> grades = new ArrayList<String>();
+		grades.add("A");
+		grades.add("B");
+		grades.add("C");
+		grades.add("D");
+		grades.add("E");
+		grades.add("F");
+		model.addAttribute("grades", grades);
 		
 		return "enrolment";
 	}
