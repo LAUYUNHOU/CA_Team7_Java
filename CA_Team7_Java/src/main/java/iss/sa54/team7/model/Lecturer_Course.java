@@ -19,7 +19,7 @@ public class Lecturer_Course {
     private Course course;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "studentID")
+    @JoinColumn(name = "lecturerID")
     private Lecturer lecturer;
     
     @Column(name="currenroll")
