@@ -18,7 +18,7 @@
 	   <td th:text="${#dates.format(course.courseStartDate, 'dd-MM-yyyy')}">Start Date</td>
 	   <td th:text="${#dates.format(course.courseEndDate, 'dd-MM-yyyy')}">End Date</td>
 	   <td><a href="ViewEnrollment.html"
-			th:href="@{/lecturer/course/}+${course.courseID}" th:utext="#{courses.page.view}"> View Enrollment </a></td>
+			th:href="@{/lecturer/course/}+${course.courseID}" th:utext="#{course.page.view}"> View Enrollment </a></td>
 	<!--   <td><a href="DeleteProduct.html"
 			th:href="@{/course/}+${course.courseID}" th:utext="#{courses.page.viewEn}"> View Enrollment </a></td>
 	--> 

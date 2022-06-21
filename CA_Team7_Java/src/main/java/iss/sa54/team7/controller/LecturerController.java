@@ -31,7 +31,7 @@ import iss.sa54.team7.service.StudentService;;
 public class LecturerController {
 	@Autowired
 	private StudentService sService;
-    @Autowired
+    @Autowired	
     private CourseService cService;
 	
 	@GetMapping("/courses")

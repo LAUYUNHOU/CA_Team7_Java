@@ -2,7 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/layout.html :: html_head"/>
 <body>
+	
+<h1> Student Details</h1>     
+<table>
+	 <tr>
+	   <th>Student First-Mid Name</th>
+	   <th>Student Last Name</th>
+	   <th>Enrollment Date</th>
+   	   <th>GPA</th>
+	 </tr>
+	 <tr th:each="student:${students}">
+	   <td th:text="${student.firstmidname}">Fisrt-Mid Name</td> 
+	   <td th:text="${student.lastname}">Last Name</td>
+   	   <td th:text="${#dates.format(student.enrollmentdate, 'dd-MM-yyyy')}">Enroll Date</td>
+   	   <td th:text="${student.gpa}">GPA</td>
 
+	</tr>
+</table>
 
+<h1> Student Course Details</h1>  
+<table>
+	 <tr>
+	   <th>Course ID</th>
+	   <th>Course Score</th>
+	   <th>Grade</th>
+	 </tr>
+	 <tr th:each="StudentCourse:${StudentCourses }">
+	   <td th:text="${StudentCourse.courseID}">ID</td> 
+	   <td th:text="${StudentCourse.score}">Name</td>
+	   <td th:text="${StudentCourse.grade}">Name</td>
+	   
+<!--	   <td><a href="ViewEnrollment.html"
+			th:href="@{/lecturer/course/}+${course.courseID}" th:utext="#{courses.page.view}"> View Enrollment </a></td>-->
+
+	</tr>
+</table>
 </body>
 </html>
