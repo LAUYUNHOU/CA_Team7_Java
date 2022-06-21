@@ -2,6 +2,7 @@ package iss.sa54.team7.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,8 +52,9 @@ public class LecturerController {
 		List<Student> slist = sService.findAllStudentsByCourse(courseID);
 		model.addAttribute("students", slist);
 		
-		Integer s = (Integer) session.getAttribute("userSession");
-		String grade = sService.getGradeByStudentAndCourseID(courseID, s);
+		Integer studentID = (Integer) session.getAttribute("userSession");
+		String grade = sService.getGradeByStudentAndCourseID(courseID, studentID);
+		model.addAttribute("studentGrade", grade);
 		
 		Course course = cService.findCourse(courseID);
 		model.addAttribute("courseName", course.getCourseName());
@@ -64,14 +67,15 @@ public class LecturerController {
 		options.add("A"); options.add("B");
 		options.add("C"); options.add("D");
 		options.add("E"); options.add("F");
-		model.addAttribute("options", options);
+		model.addAttribute("grades", options);
 		return "enrolment";
 	}
 
-	@PostMapping("/grade")
-	public String gradeStudent(@ModelAttribute("students") Student s){
-		
-		return "enrolment";
+	@GetMapping("/grade")
+	public String gradeStudent(@RequestParam Map<String,String> requestParams){
+		   String studentID = requestParams.get("stu");
+		   String grade = requestParams.get("grade");
+		   return 
 	}
 }
 
