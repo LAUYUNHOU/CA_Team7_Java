@@ -76,5 +76,43 @@ public class AdminController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
 		}
-	}	
+	}
+
+    //-------------------
+    //Lecture
+    //-------------------
+    @GetMapping("/manageLecturer")
+    List<Lecturer> lecture() {return lService.findAllLecturer();}
+    @PostMapping("/manageLecture")
+    public ResponseEntity<Lecturer> createCourse(@RequestBody Lecturer newLecturer)
+    {try {
+    	Lecturer l = lService.createLecturer
+    			(new Lecturer(newLecturer.getLecturerName()));
+    			return new ResponseEntity<>(l, HttpStatus.CREATED);
+    			} catch (Exception e) {
+    			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+    			} }  
+    
+    @GetMapping("/manageLecturer/{id}")
+	public ResponseEntity<Lecturer> getLecturerById(@PathVariable("id") Integer id) {
+		int i = id;
+		Optional<Lecturer> lData = Optional.ofNullable(lService.findLecturer(i));
+		if (lData.isPresent()) {
+			return new ResponseEntity<>(lData.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}   
+    
+    @PutMapping("/manageLecturer/edit/{id}")
+	public ResponseEntity<Lecturer> editLecturer(@PathVariable("id") int id, @RequestBody Course course) {
+		Optional<Lecturer> lData = Optional.ofNullable(lService.findLecturer(id));
+		if (lData.isPresent()) {
+			Lecturer _lecturer = lData.get();			
+			_lecturer.setLecturerName(Lecturer.getLecturerName());
+			return new ResponseEntity<>(lService.editLecturer(_lecturer), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 }
