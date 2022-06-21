@@ -3,6 +3,8 @@ package iss.sa54.team7.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 //import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +46,12 @@ public class LecturerController {
 	}
 
 	@GetMapping("/courses/{courseID}")
-	public String viewCourseEnrolled(Model model, @PathVariable("courseID") Integer courseID){
+	public String viewCourseEnrolled(Model model, @PathVariable("courseID") Integer courseID, HttpSession session){
 		List<Student> slist = sService.findAllStudentsByCourse(courseID);
 		model.addAttribute("students", slist);
 		
-		Integer studentID = 
-		Student s = sService.getGradeByStudentAndCourseID(courseID, studentID);
+		Integer s = (Integer) session.getAttribute("userSession");
+		String grade = sService.getGradeByStudentAndCourseID(courseID, s);
 		
 		Course course = cService.findCourse(courseID);
 		model.addAttribute("courseName", course.getCourseName());

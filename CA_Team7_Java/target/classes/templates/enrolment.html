@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/layout.html :: html_head"/></head>
+<head th:replace="fragments/layout.html :: html_head"/>
+<script type="text/javascript">
+	function savegrade() {
+  		let text;
+  		let g = prompt("Please enter new grade:", "Harry Potter");
+  		if (g == null || g == "") {
+    		text = "User cancelled the prompt.";
+  			} 
+  			else {
+    			text = "Grade is"+g+ "- updated";
+  			}
+  		document.getElementById("gradebutton").innerHTML = text;
+		}
+</script>
+</script>
+</head>
 <body>
 	<h2>Students Enrolled in <span th:text="${courseName}"></span></h2>
 	<div th:if="${not #lists.isEmpty(students)}">
@@ -17,19 +32,12 @@
 			<td th:text = "*{studentID}">StudentID</td>
 			<td th:text = "${student.firstMidName}">Name</td> 
 			<td th:text = "${student.lastName}">LastName</td>
-			<td th:text = "${}">
+			<td th:text = "${student.Student_Course.grade}">
 			<td>
-				<select id="grades" name="grades" th:field="${student.Student_Course.grade}">
-					<option value="">Enter grade...</option>
-					<option th:each="option : ${options}" th:value="${student.grade}" th:text="${option}"></option>
-				</select>
-			<td th:text = "${student.grade}">Grade
-				<select class ="form-control" id ="dropDownList">
-					<option value="0">Select Grade</option>
-					<option th:each="grade : ${grades}" th:value="${grade}"
-					th:text="${grade}"></option>
-				</select>
-			</td>
+			<form th:action="@{/grade}" method="post" id="gradeform" name="gradeform"> 
+				<button onclick="savegrade()">Grade</button>
+				<span id="gradebutton"></span>
+			</form>
 		</tr>
 	</table>
 	<form th:action="@{/grade}" method="post"><input type="submit" value="Confirm Grades"/></form> 
