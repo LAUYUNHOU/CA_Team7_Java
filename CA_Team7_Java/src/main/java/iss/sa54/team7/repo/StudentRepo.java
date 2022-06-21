@@ -12,9 +12,7 @@ public interface StudentRepo extends JpaRepository<Student, Integer> {
 	@Query("SELECT s FROM Student s and Student_Course sc WHERE sc.courseID = :courseID AND s.courseID = sc.courseID")
 	public ArrayList<Student> findAllStudentsByCourseID(@Param("courseID")Integer courseID);
 	
-	@Query("SELECT sc FROM Student s AND Student_Course sc WHERE sc.courseID = :cID AND s.studentID = :sID"
-			+ "AND s.courseID = sc.courseID"
-			+ "AND s.studentID = sc.studentID")
+	@Query("SELECT sc FROM Student_Course sc WHERE sc.courseID = :cID AND s.studentID = :sID")
 	public Student_Course getCourseGradeByStudentAndCourseID(@Param("cID")Integer courseID, @Param("sID")Integer studentID);
 	
 }

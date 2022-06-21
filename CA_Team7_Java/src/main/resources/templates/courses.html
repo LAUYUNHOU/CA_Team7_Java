@@ -4,7 +4,6 @@
 <body>
 	
 <h1> Course List</h1>     
-
 <table>
 	 <tr>
 	   <th>Course ID</th>
@@ -12,17 +11,14 @@
 	   <th>Start Date</th>
 	   <th>End Date</th>
 	 </tr>
-	 <tr th:each="course:${courses }">
+	 <tr th:each="course:${courses}">
 	   <td th:text="${course.courseID}">ID</td> 
 	   <td th:text="${course.courseName}">Name</td>
 	   <td th:text="${#dates.format(course.courseStartDate, 'dd-MM-yyyy')}">Start Date</td>
 	   <td th:text="${#dates.format(course.courseEndDate, 'dd-MM-yyyy')}">End Date</td>
-	   <td><a href="ViewEnrollment.html"
-			th:href="@{/lecturer/course/}+${course.courseID}" th:utext="#{courses.page.view}"> View Enrollment </a></td>
-	<!--   <td><a href="DeleteProduct.html"
-			th:href="@{/course/}+${course.courseID}" th:utext="#{courses.page.viewEn}"> View Enrollment </a></td>
-	--> 
+	   <td><a href="enrolment.html" th:href="@{'/lecturer/courses/'+${course.courseID}}">View Enrolment</a></td>
 	</tr>
+	
 </table>
 </body>
 </html>

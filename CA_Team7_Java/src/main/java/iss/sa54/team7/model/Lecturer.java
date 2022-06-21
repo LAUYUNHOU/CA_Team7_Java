@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,19 +20,22 @@ import lombok.NoArgsConstructor;
 @Data
 public class Lecturer {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int lecturerID;
 	@Column(name="lecturername")
 	private String lecturerName;
     
+	@OneToOne
+    private User user2;
 	@OneToMany(mappedBy = "lecturer", cascade = CascadeType.ALL)
     private Set<Lecturer_Course> lecturerCourses = new HashSet<>();
 	
-	public Lecturer(String lecturerName) {
+    public Lecturer(String lecturerName, User user2, Set<Lecturer_Course> lecturerCourses) {
 		super();
+		this.lecturerID = user2.getUserId();
 		this.lecturerName = lecturerName;
-		
 	}
+	
+	
 }
 
 

@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -18,7 +19,6 @@ import lombok.Data;
 @Entity
 public class Student {  
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int studentID;
     @Column(name="lastname")
     private String lastName;
@@ -29,11 +29,14 @@ public class Student {
     @Column(name="gpa")
     private double gpa;
 
+    @OneToOne
+    private User user1;
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<Student_Course> studentCourses = new HashSet<>();
 
     public Student(String lastName, String firstMidName, Date enrollmentDate, double gpa) {
-        this.lastName = lastName;
+        this.studentID = user1.getUserId();
+    	this.lastName = lastName;
         this.firstMidName = firstMidName;
         this.enrollmentDate = enrollmentDate;
         this.gpa = gpa;

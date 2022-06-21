@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import iss.sa54.team7.model.RoleType;
 import iss.sa54.team7.model.User;
+import iss.sa54.team7.service.LecturerService;
+import iss.sa54.team7.service.StudentService;
 import iss.sa54.team7.service.UserService;
 
 
@@ -22,6 +24,11 @@ public class SessionController {
 
 	@Autowired
 	UserService uservice;
+	@Autowired
+	StudentService sservice;
+	@Autowired
+	LecturerService lservice;
+
 	
 	@RequestMapping("/viewLoginForm")
 	public String viewLoginForm(Model model) {
@@ -58,14 +65,17 @@ public class SessionController {
 		
 		if (authenticateUser(user, userFromDb)) {
 			RoleType role = userFromDb.getRole();
-			if (role == RoleType.ADMIN)
-				nextPage = "admMainPage";
-			else if(role == RoleType.LECTURER)
-				nextPage = "lectMainPage";
-			else
-				nextPage = "stuMainPage";
-			
-			session.setAttribute("currentUser", user);
+			if (role == RoleType.ADMIN) {
+				nextPage = "forward:/admin";
+			}
+			else if(role == RoleType.LECTURER) {
+				nextPage = "forward:/lecturer";
+			}
+				
+			else {
+				nextPage = "forward:/student";
+			}
+			session.setAttribute("userSession", userFromDb.getUserId());
 		}
 		else {
 			model.addAttribute("wrong", "true");
