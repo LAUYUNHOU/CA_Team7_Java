@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -13,13 +14,17 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
-	
 	private String username;
-	
 	private String password;
-	
 	private RoleType role;
 
+	@OneToOne(mappedBy="user1")
+	private Student student;
+	@OneToOne(mappedBy="user2")
+	private Lecturer lecturer;
+	@OneToOne(mappedBy="user3")
+	private Admin admin;
+	
 	public User(String username, String password, RoleType role) {
 		super();
 		this.username = username;
