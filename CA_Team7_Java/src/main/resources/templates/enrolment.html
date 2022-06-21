@@ -3,9 +3,16 @@
 <head th:replace="fragments/layout.html :: html_head"/>
 <body>
 	
+<<<<<<< HEAD
 	<h2>Student Enrolment (<span th:text="${courseName}"></span>)</h2
 	
 	<div th:if="${not #lists.isEmpty(students)}">
+=======
+	<h2>Students Enrolled in <span th:text="${courseName}"></span></h2>
+	
+	<div th:if="${not #lists.isEmpty(students)}">
+	<form method ="post" action="@{/lecturer/grade}">
+>>>>>>> f15314fa47112f0d3463ef19e9f47841a9052bcf
 	<table style = "border: 1;">;	
 		<tr>
 			<th>StudentID</th>
@@ -17,11 +24,29 @@
 			<td th:text = "*{studentID}">StudentID</td>
 			<td th:text = "${student.firstMidName}">Name</td> 
 			<td th:text = "${student.lastName}">LastName</td>
+<<<<<<< HEAD
 			<td>
 				<select id="grades" name="grades" th:field="${student.Student_Course.grade}">
 					<option value="">Enter grade...</option>
 					<option th:each="option : ${options}" th:value="${student.grade}" th:text="${option}"></option>
 				</select>
+=======
+			<td th:text = "${student.grade}">Grade
+				<select class ="form-control" id ="dropDownList">
+					<option value="0">Select Grade</option>
+					<option th:each="grade : ${grades}" th:value="${grade}"
+					th:text="${grade}"></option>
+				</select>
+			<!-- 	<select name="grades" id="grades">
+					<option value="A">A</option>
+					<option value="B">B</option>
+					<option value="C">C</option>
+					<option value="D">D</option>
+					<option value="E">E</option>
+					<option value="F">F</option>
+				</select> 
+			-->
+>>>>>>> f15314fa47112f0d3463ef19e9f47841a9052bcf
 			</td>
 		</tr>
 	</table>

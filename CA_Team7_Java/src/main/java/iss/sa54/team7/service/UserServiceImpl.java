@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +17,7 @@ import iss.sa54.team7.repo.UserRepo;
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Resource
+	@Autowired
 	private UserRepo urepo;
 	
 	
@@ -34,6 +35,15 @@ public class UserServiceImpl implements UserService {
 	 * @Transactional public User findUserByUsername(String name) { User user =
 	 * urepo.findUserByUsername(name); if (user == null) return null; return user; }
 	 */
+	  
+	@Override
+	public User findUserByUsername(String name) {
+		User user = urepo.findUserByUsername(name);
+		if (user == null)
+			return null;
+		
+		return user;
+	}
 
 	@Override
 	@Transactional

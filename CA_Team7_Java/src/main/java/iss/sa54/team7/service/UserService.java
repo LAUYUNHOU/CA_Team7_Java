@@ -15,6 +15,6 @@ public interface UserService {
 	void removeUser(User user);
 	public User editUser(User user);
 	//Optional<User> findRoleByUserID(Integer userID);
-	//public User findUserByUsername(String name);
+	public User findUserByUsername(String name);
 
 }

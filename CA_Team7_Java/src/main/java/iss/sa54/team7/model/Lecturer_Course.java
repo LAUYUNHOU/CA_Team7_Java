@@ -1,50 +1,32 @@
 package iss.sa54.team7.model;
 
-import java.util.Collection;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Lecturer_Course")
 @NoArgsConstructor
 @Data
 
 public class Lecturer_Course {
-	@Id
-	@Column(name = "lecturerID")
-	private int lecturerID;
-	@Column(name = "courseID")
-	private int courseID;
-	@Column(name = "Size")
-	private int Size;
-    
-    @ManyToOne
-    @JoinColumn(name="lectureID")
-    private Collection<Lecturer> lecturers;
-    
-    @ManyToOne
-    @JoinColumn(name="courseID")
-    private Collection<Course> courses;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+	
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "courseID")
+    private Course course;
 
-	public Lecturer_Course(int lecturerID, int courseID, int size, Collection<Lecturer> lecturers,
-			Collection<Course> courses) {
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "lecturerID")
+    private Lecturer lecturer;
+    
+    @Column(name="currenroll")
+    private boolean currEnroll;
+
+	public Lecturer_Course(Lecturer lecturer) {
 		super();
-		this.lecturerID = lecturerID;
-		this.courseID = courseID;
-		Size = size;
-		this.lecturers = lecturers;
-		this.courses = courses;
-	}
-    
-    
+		this.lecturer = lecturer;
+	}	
 }
-
-

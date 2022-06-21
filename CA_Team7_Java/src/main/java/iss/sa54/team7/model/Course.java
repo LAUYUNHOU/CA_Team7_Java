@@ -1,57 +1,57 @@
 package iss.sa54.team7.model;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "Course")
-@NoArgsConstructor
 @Data
+@Entity
+public class Course {  
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int courseID;
 
-public class Course {
-	@Id
-	@Column(name = "courseID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int courseID;
-	@Column(name = "courseName")
-	private String courseName;
-	@Column(name = "courseStartDate")
-	private Date courseStartDate;
-	@Column(name = "courseEndDate")
-	private Date courseEndDate;
-    
-    @OneToMany(mappedBy="courses")
-    private Student_Course CourseStudent;
-    
-    @OneToMany(mappedBy="lecturers") 
-    private Lecturer_Course CourseLecture;
+    @Column(name = "coursename")
+    private String courseName;
+    @Column(name="coursestartdate")
+    private Date courseStartDate;
+    @Column(name="courseenddate")
+    private Date courseEndDate;
+    @Column(name="courseunit")
+    private int courseUnit;
+    @Column(name="maxsize")
+    private int maxSize;
 
-	
-	public Course(int courseID, String courseName, Date courseStartDate, Date courseEndDate,
-			Student_Course courseStudent, Lecturer_Course courseLecture) {
-		super();
-		this.courseID = courseID;
-		this.courseName = courseName;
-		this.courseStartDate = courseStartDate;
-		this.courseEndDate = courseEndDate;
-		CourseStudent = courseStudent;
-		CourseLecture = courseLecture;
-	}
-
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private Set<Student_Course> studentCourses;
     
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private Set<Lecturer_Course> lecturerCourses;
+
+    public Course(String courseName, Date courseStartDate, Date courseEndDate, int courseUnit, int maxSize, Student_Course... studentCourses) {
+        this.courseName = courseName;
+        this.courseStartDate = courseStartDate;
+        this.courseEndDate = courseEndDate;
+        this.courseUnit = courseUnit;
+        this.maxSize = maxSize;
+        for(Student_Course studentCourse : studentCourses) studentCourse.setCourse(this);
+        this.studentCourses = Stream.of(studentCourses).collect(Collectors.toSet());
+    }
+    
+    public Course(String courseName, Lecturer_Course... lecturerCourses) {
+        this.courseName = courseName;
+        for(Lecturer_Course lecturerCourse : lecturerCourses) lecturerCourse.setCourse(this);
+        this.lecturerCourses = Stream.of(lecturerCourses).collect(Collectors.toSet());
+    }
 }
-
-
