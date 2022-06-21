@@ -65,7 +65,7 @@ public class SessionController {
 			else
 				nextPage = "stuMainPage";
 			
-			session.setAttribute("currentUser", user);
+			session.setAttribute("userSession", userFromDb.getUserId());
 		}
 		else {
 			model.addAttribute("wrong", "true");
