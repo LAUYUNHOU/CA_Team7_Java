@@ -1,12 +1,16 @@
 package iss.sa54.team7.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,31 +32,49 @@ public class AdminController {
     
     @GetMapping("/manageCourses")
     List<Course> courselist() {return cService.findAllCourses();}
-    @PostMapping("/manageCourses") Course createCourse(@RequestBody Course newCourse)
-    {return cService.createCourse(newCourse);}
-    @GetMapping("/manageCourses/{id}") Course find(@PathVariable int id) {
-    return cService.findCourse(id);}
-    //@PutMapping("/manageCourse/{id}"){return cService.editCourse(course);}
-    @DeleteMapping("/manageCourses") void removeCourse(Course course)
-	{cService.removeCourse(course);}
-	/*
-	 
-	 * @GetMapping("/employees/{id}") Employee one(@PathVariable Long id) {
-	 * 
-	 * return repository.findById(id) .orElseThrow(() -> new
-	 * EmployeeNotFoundException(id)); }
-	 * 
-	 * @PutMapping("/employees/{id}") Employee replaceEmployee(@RequestBody Employee
-	 * newEmployee, @PathVariable Long id) {
-	 * 
-	 * return repository.findById(id) .map(employee -> {
-	 * employee.setName(newEmployee.getName());
-	 * employee.setRole(newEmployee.getRole()); return repository.save(employee); })
-	 * .orElseGet(() -> { newEmployee.setId(id); return
-	 * repository.save(newEmployee); }); }
-	 * 
-	 * @DeleteMapping("/employees/{id}") void deleteEmployee(@PathVariable Long id)
-	 * { repository.deleteById(id); }
-	 */
-	
+    @PostMapping("/manageCourses")
+    public ResponseEntity<Course> createCourse(@RequestBody Course newCourse)
+    {try {
+    	Course c = cService.createCourse
+    			(new Course(newCourse.getCourseName(), 
+    			newCourse.getCourseStartDate(), newCourse.getCourseEndDate(),
+    			newCourse.getCourseUnit(),newCourse.getMaxSize()));
+    			return new ResponseEntity<>(c, HttpStatus.CREATED);
+    			} catch (Exception e) {
+    			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+    			} }    	
+    @GetMapping("/manageCourses/{id}")
+	public ResponseEntity<Course> getCourseById(@PathVariable("id") Integer id) {
+		int i = id;
+		Optional<Course> cData = Optional.ofNullable(cService.findCourse(i));
+		if (cData.isPresent()) {
+			return new ResponseEntity<>(cData.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}    
+    @PutMapping("/manageCourses/edit/{id}")
+	public ResponseEntity<Course> editStudent(@PathVariable("id") int id, @RequestBody Course course) {
+		Optional<Course> cData = Optional.ofNullable(cService.findCourse(id));
+		if (cData.isPresent()) {
+			Course _course = cData.get();			
+			_course.setCourseName(course.getCourseName());
+			_course.setCourseStartDate(course.getCourseStartDate());
+			_course.setCourseEndDate(course.getCourseEndDate());
+			_course.setCourseUnit(course.getCourseUnit());
+			_course.setMaxSize(course.getMaxSize());
+			return new ResponseEntity<>(cService.editCourse(_course), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+    @DeleteMapping("/manageCourses/{id}")
+	public ResponseEntity<HttpStatus> deleteStudent(@PathVariable("id") int id) {
+		try {
+			cService.removeCoursebyId(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}
+	}	
 }

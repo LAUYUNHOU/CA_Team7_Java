@@ -50,8 +50,11 @@ public class CourseServiceImpl implements CourseService {
 	public void removeCourse(Course course) {
 		courseRepo.delete(course);
 	}
-
-	
+	@Override
+	@Transactional
+	public void removeCoursebyId(Integer courseID){
+		courseRepo.deleteById(courseID);
+	};
 	/* * @Override
 	 * 
 	 * @Transactional public ArrayList<Course> findCoursesByID(Integer courseID) {
