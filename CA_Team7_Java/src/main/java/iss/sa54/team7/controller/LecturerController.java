@@ -1,5 +1,6 @@
 package iss.sa54.team7.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //import javax.validation.Valid;
@@ -42,13 +43,26 @@ public class LecturerController {
 	}
 
 	@GetMapping("/courses/{courseID}")
-	public String viewCourseEnrolled(Model model, Model model2, @PathVariable("courseID") Integer courseID){
+	public String viewCourseEnrolled(Model model, @PathVariable("courseID") Integer courseID){
 		List<Student> slist = sService.findAllStudentsByCourse(courseID);
 		model.addAttribute("students", slist);
+		
+		Course course = cService.findCourse(courseID);
+		model.addAttribute("courseName", course.getCourseName());
+		return "enrolment";
+	}
+	
+	@GetMapping("/enrolment")
+	public String populateGrades(Model model) {
+		List<String> options = new ArrayList<String>();
+		options.add("A"); options.add("B");
+		options.add("C"); options.add("D");
+		options.add("E"); options.add("F");
+		model.addAttribute("options", options);
 		return "enrolment";
 	}
 
-	@PostMapping("/enrolment/grade")
+	@PostMapping("/grade")
 	public String gradeStudent(@ModelAttribute("students") Student s){
 		
 		return "enrolment";

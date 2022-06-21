@@ -3,10 +3,9 @@
 <head th:replace="fragments/layout.html :: html_head"/>
 <body>
 	
-	<h2>Student enrolment (<span th:text="${courseName}"></span>)</h2
+	<h2>Student Enrolment (<span th:text="${courseName}"></span>)</h2
 	
 	<div th:if="${not #lists.isEmpty(students)}">
-	< action = "post" th:action="@{/lecturer/grade}">
 	<table style = "border: 1;">;	
 		<tr>
 			<th>StudentID</th>
@@ -18,21 +17,15 @@
 			<td th:text = "*{studentID}">StudentID</td>
 			<td th:text = "${student.firstMidName}">Name</td> 
 			<td th:text = "${student.lastName}">LastName</td>
-			<td th:text = "${student.grade}">Grade
-				<select name="grades" id="grades">
-					<option value="A">A</option>
-					<option value="B">B</option>
-					<option value="C">C</option>
-					<option value="D">D</option>
-					<option value="E">E</option>
-					<option value="F">F</option>
+			<td>
+				<select id="grades" name="grades" th:field="${student.Student_Course.grade}">
+					<option value="">Enter grade...</option>
+					<option th:each="option : ${options}" th:value="${student.grade}" th:text="${option}"></option>
 				</select>
 			</td>
 		</tr>
 	</table>
-	<input type="submit" value="Confirm grades'"/>
-	</form>
-	
+	<form th:action="@{/grade}" method="post"><input type="submit" value="Confirm Grades"/></form> 
 	</div>
 </body>
 </html>
