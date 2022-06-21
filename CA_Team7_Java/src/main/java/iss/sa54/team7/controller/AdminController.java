@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import iss.sa54.team7.model.Course;
 import iss.sa54.team7.model.Lecturer;
+import iss.sa54.team7.model.Student;
 import iss.sa54.team7.service.CourseService;
 import iss.sa54.team7.service.LecturerService;
 import iss.sa54.team7.service.StudentService;;
@@ -79,9 +80,9 @@ public class AdminController {
 		}
 	}
 
-    //-------------------
-    //Lecture
-    //-------------------
+
+    //-------------------Lecture-------------------
+
     @GetMapping("/manageLecturer")
     List<Lecturer> lecture() {return lService.findAllLecturer();}
     @PostMapping("/manageLecture")
@@ -106,14 +107,75 @@ public class AdminController {
 	}   
     
     @PutMapping("/manageLecturer/edit/{id}")
-	public ResponseEntity<Lecturer> editLecturer(@PathVariable("id") int id, @RequestBody Course course) {
+	public ResponseEntity<Lecturer> editLecturer(@PathVariable("id") int id, @RequestBody Lecturer lecturer) {
 		Optional<Lecturer> lData = Optional.ofNullable(lService.findLecturer(id));
 		if (lData.isPresent()) {
 			Lecturer _lecturer = lData.get();			
-			_lecturer.setLecturerName(_lecturer.getLecturerName());
+			_lecturer.setLecturerName(lecturer.getLecturerName());
 			return new ResponseEntity<>(lService.editLecturer(_lecturer), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+    
+    @DeleteMapping("/manageLecturer/{id}")
+	public ResponseEntity<HttpStatus> removeLecturer(@PathVariable("id") int id) {
+		try {
+			lService.removeLecturerbyId(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+
+    //-------------------Student-------------------
+    
+    @GetMapping("/manageStudents")
+    List<Student> studentlist() {return sService.findAllStudents();}
+    @PostMapping("/manageStudents")
+    public ResponseEntity<Student> createCourse(@RequestBody Student newStudent)
+    {try {
+    	Student s = sService.createStudent
+    			(new Student(newStudent.getLastName(), 
+				newStudent.getFirstMidName(),newStudent.getEnrollmentDate(),
+				newStudent.getGpa()));
+    			return new ResponseEntity<>(s, HttpStatus.CREATED);
+    			} catch (Exception e) {
+    			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+    			} }    	
+    
+    @GetMapping("/manageStudents/{id}")
+	public ResponseEntity<Student> getStudentById(@PathVariable("id") Integer id) {
+		int i = id;
+		Optional<Student> sData = Optional.ofNullable(sService.findStudent(i));
+		if (sData.isPresent()) {
+			return new ResponseEntity<>(sData.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}    
+    @PutMapping("/manageStudents/edit/{id}")
+	public ResponseEntity<Student> editStudent(@PathVariable("id") int id, @RequestBody Student student) {
+		Optional<Student> sData = Optional.ofNullable(sService.findStudent(id));
+		if (sData.isPresent()) {
+			Student _student = sData.get();			
+			_student.setLastName(student.getLastName());
+			_student.setFirstMidName(student.getFirstMidName());
+			_student.setEnrollmentDate(student.getEnrollmentDate());
+			_student.setGpa(_student.getGpa());
+			return new ResponseEntity<>(sService.editStudent(_student), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+    @DeleteMapping("/manageStudents/{id}")
+	public ResponseEntity<HttpStatus> removeStudent(@PathVariable("id") int id) {
+		try {
+			sService.removeStudentbyId(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+
 }
