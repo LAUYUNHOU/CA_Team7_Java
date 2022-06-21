@@ -43,6 +43,12 @@ public class LecturerServiceImpl implements LecturerService {
 	public void removeLecturer(Lecturer lecturer) {
 		lrepo.delete(lecturer);
 	}
+		
+	@Override
+	@Transactional
+	public void removeLecturerbyId(Integer lecturerID) {
+		lrepo.deleteById(lecturerID);
+	}
 
 	/*
 	 * @Override

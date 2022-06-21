@@ -61,5 +61,10 @@ public class StudentServiceImpl implements StudentService {
 	public Student findStudent(Integer studentID) {
 		return srepo.findById(studentID).orElse(null);
 	}
-
+		
+	@Override
+	@Transactional
+	public void removeStudentbyId(Integer studentID) {
+		srepo.deleteById(studentID);
+	}
 }

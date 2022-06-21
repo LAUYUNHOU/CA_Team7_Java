@@ -17,16 +17,16 @@ import lombok.NoArgsConstructor;
 @Data
 
 public class Lecturer_Course {
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "courseID")
     private Course course;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "studentID")
+    @JoinColumn(name = "lecturerID")
     private Lecturer lecturer;
     
     private int size;

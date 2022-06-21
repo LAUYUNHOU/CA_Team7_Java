@@ -14,5 +14,6 @@ public interface StudentService {
 	void removeStudent(Student student);
 	public ArrayList<Student> findAllStudentsByCourse(Integer courseID);
 	public String getGradeByStudentAndCourseID(Integer courseID, Integer studentID);
+	void removeStudentbyId(Integer studentID);
 	
 }

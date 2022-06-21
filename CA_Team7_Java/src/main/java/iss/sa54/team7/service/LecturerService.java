@@ -10,5 +10,6 @@ public interface LecturerService {
 	Lecturer createLecturer(Lecturer lecturer);
 	Lecturer editLecturer(Lecturer lecturer);
 	void removeLecturer(Lecturer lecturer);
+	void removeLecturerbyId(Integer lecturerID);
 	//ArrayList<Lecturer>findLecturersByID(Integer lecturerID);
 }

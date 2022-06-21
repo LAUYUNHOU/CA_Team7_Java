@@ -11,6 +11,7 @@ public interface CourseService {
 	Course findCourse(Integer courseID);
 	Course createCourse(Course course);
 	Course editCourse(Course course);
+	void removeCoursebyId(Integer courseID);
 	void removeCourse(Course course);
 	public ArrayList<Course> findCoursesByLectID(Integer lectID);
 }
