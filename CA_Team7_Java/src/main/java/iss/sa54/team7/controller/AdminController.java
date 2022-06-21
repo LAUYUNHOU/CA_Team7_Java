@@ -110,7 +110,7 @@ public class AdminController {
 		Optional<Lecturer> lData = Optional.ofNullable(lService.findLecturer(id));
 		if (lData.isPresent()) {
 			Lecturer _lecturer = lData.get();			
-			_lecturer.setLecturerName(Lecturer.getLecturerName());
+			_lecturer.setLecturerName(_lecturer.getLecturerName());
 			return new ResponseEntity<>(lService.editLecturer(_lecturer), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
