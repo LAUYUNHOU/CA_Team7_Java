@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import iss.sa54.team7.model.Course;
+import iss.sa54.team7.model.Lecturer;
 import iss.sa54.team7.service.CourseService;
 import iss.sa54.team7.service.LecturerService;
 import iss.sa54.team7.service.StudentService;;
