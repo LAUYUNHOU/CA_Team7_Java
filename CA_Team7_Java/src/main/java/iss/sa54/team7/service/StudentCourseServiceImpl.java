@@ -45,12 +45,11 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 	public Student_Course createCourse(Student_Course StudentCourse) {
 		return studentcourseRepo.saveAndFlush(StudentCourse);
 	}
-	/*
-	 * @Override
-	 * 
-	 * @Transactional public Student_Course editCourse(Student_Course StudentCourse)
-	 * { return studentcourseRepo.saveAndFlush(StudentCourse); }
-	 */
+	@Override
+	 @Transactional 
+	 public Student_Course editCourse(Student_Course StudentCourse)
+		{ return studentcourseRepo.saveAndFlush(StudentCourse); }
+	 
 
 
 }

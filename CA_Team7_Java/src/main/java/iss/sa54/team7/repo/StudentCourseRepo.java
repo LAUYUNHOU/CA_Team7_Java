@@ -16,5 +16,8 @@ public interface StudentCourseRepo extends JpaRepository<Student_Course, Integer
 	
 	@Query("SELECT sc FROM Student_Course sc AND Course c WHERE sc.courseID = :cID AND sc.courseID = c.courseID")
 	public ArrayList<Student_Course> getAllGradesByCourseID(@Param("cID")Integer courseID);
+	
+	@Query("SELECT sc FROM Student_Course sc WHERE sc.courseID = :cID AND sc.studentID = :sID")
+	public Student_Course getScByCourseAndStudentID(@Param("cID")Integer courseID, @Param("sID")Integer studentID);
 
 }

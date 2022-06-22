@@ -71,10 +71,19 @@ public class LecturerController {
 		return "enrolment";
 	}
 
-	@PostMapping("/courses/{courseID}/enrolment/grade")
-	public String gradeStudent(@PathVariable("courseID") Integer cID, @ModelAttribute("gradeoption") String grade){
+	@PostMapping("courses/{courseID}/grade")
+	public String gradeStudent(@PathVariable("courseID") Integer cID, @ModelAttribute("gradeform") String grade, HttpSession session){
 		   //when got time then see if can lock the grade form
 		// when got EVEN MORE TIME then check for session login time vs course enddate and lock it
+		ArrayList<Student_Course> sclist = scService.getAllStudentsGradesByCourseID(cID);
+		Integer sID = (Integer) session.getAttribute("userSession");
+		for (Student_Course sc : sclist) {
+			if (sc.getStudent().getStudentID() == sID) {
+				sc.setGrade(grade);
+				scService.editCourse(sc);
+			}
+		}
+		return "enrolment";
 	}
 
 }
