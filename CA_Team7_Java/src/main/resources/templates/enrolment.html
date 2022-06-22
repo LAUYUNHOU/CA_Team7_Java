@@ -20,8 +20,8 @@
 			<td th:text = "${student.lastName}">LastName</td>
 			<td th:text = "${gradelist.grade}">
 			<td>
-			<form th:action="@{/courses/{courseID}/grade}" method="post"> 
-				<select class="form-control" id="gradeoption" name="gradeoption">
+			<form th:action="@{/courses/{courseID}/grade}" method="post" th:object="${gradeform}"> 
+				<select class="form-control" id="gradeselect" name="gradeselect">
 				<option value=" ">Enter new grade</option>
 				<option th:each="gradeoption : ${gradeoptions}" th:value="${gradeoption}" th:text="${gradeoption}">
 				</option>
