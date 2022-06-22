@@ -26,9 +26,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import iss.sa54.team7.model.Course;
 import iss.sa54.team7.model.Student;
+import iss.sa54.team7.model.Student_Course;
 import iss.sa54.team7.model.User;
 import iss.sa54.team7.service.CourseService;
 import iss.sa54.team7.service.LecturerService;
+import iss.sa54.team7.service.StudentCourseService;
 import iss.sa54.team7.service.StudentService;;
 
 
@@ -39,6 +41,8 @@ public class LecturerController {
 	private StudentService sService;
     @Autowired
     private CourseService cService;
+    @Autowired
+    private StudentCourseService scService;
 	
 	@GetMapping("/courses")
 	public String viewCoursesTaught(Model model, Integer lectID){
@@ -52,30 +56,26 @@ public class LecturerController {
 		List<Student> slist = sService.findAllStudentsByCourse(courseID);
 		model.addAttribute("students", slist);
 		
-		Integer studentID = (Integer) session.getAttribute("userSession");
-		String grade = sService.getGradeByStudentAndCourseID(courseID, studentID);
-		model.addAttribute("studentGrade", grade);
-		
-		Course course = cService.findCourse(courseID);
-		model.addAttribute("courseName", course.getCourseName());
+		List<Student_Course> gradelist = scService.getAllStudentsGradesByCourseID(courseID);
+		model.addAttribute("gradelist", gradelist);
 		return "enrolment";
 	}
 	
-	@GetMapping("/enrolment")
+	@GetMapping("/courses/{courseID}/enrolment")
 	public String populateGrades(Model model) {
 		List<String> options = new ArrayList<String>();
 		options.add("A"); options.add("B");
 		options.add("C"); options.add("D");
 		options.add("E"); options.add("F");
-		model.addAttribute("grades", options);
+		model.addAttribute("gradeoptions", options);
 		return "enrolment";
 	}
 
-	@GetMapping("/grade")
-	public String gradeStudent(@RequestParam Map<String,String> requestParams){
-		   String studentID = requestParams.get("stu");
-		   String grade = requestParams.get("grade");
-		   return 
+	@PostMapping("/courses/{courseID}/enrolment/grade")
+	public String gradeStudent(@PathVariable("courseID") Integer cID, @ModelAttribute("gradeoption") String grade){
+		   //when got time then see if can lock the grade form
+		// when got EVEN MORE TIME then check for session login time vs course enddate and lock it
 	}
+
 }
 

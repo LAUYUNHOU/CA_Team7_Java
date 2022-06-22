@@ -12,4 +12,5 @@ public interface StudentCourseService {
 	Student_Course createCourse(Student_Course StudentCourse);
 	//Student_Course editCourse(Student_Course StudentCourse);
 	public ArrayList<Student_Course> findCoursesByStuID(Integer stuID);
+	ArrayList<Student_Course> getAllStudentsGradesByCourseID(Integer courseID);
 }

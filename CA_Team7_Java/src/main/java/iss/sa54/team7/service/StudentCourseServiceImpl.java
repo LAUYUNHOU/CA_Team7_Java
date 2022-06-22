@@ -20,6 +20,12 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 	public ArrayList<Student_Course> findCoursesByStuID(Integer stuID) {
 		return studentcourseRepo.findCoursesByStuID(stuID);
 	}
+	
+	@Override
+	@Transactional
+	public ArrayList<Student_Course> getAllStudentsGradesByCourseID(Integer courseID) {
+		return studentcourseRepo.getAllGradesByCourseID(courseID);
+	}
 
 	@Override
 	@Transactional 

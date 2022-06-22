@@ -59,11 +59,11 @@ public class SessionController {
 		if (authenticateUser(user, userFromDb)) {
 			RoleType role = userFromDb.getRole();
 			if (role == RoleType.ADMIN)
-				nextPage = "admMainPage";
+				nextPage = "forward:/admin";
 			else if(role == RoleType.LECTURER)
-				nextPage = "lectMainPage";
+				nextPage = "forward:/lecturer";
 			else
-				nextPage = "stuMainPage";
+				nextPage = "forward:/student";
 			
 			session.setAttribute("userSession", userFromDb.getUserId());
 		}
