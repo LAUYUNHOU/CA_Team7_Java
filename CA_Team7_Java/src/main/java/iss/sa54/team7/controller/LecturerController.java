@@ -85,6 +85,15 @@ public class LecturerController {
 		}
 		return "enrolment";
 	}
+	
+	@RequestMapping("/studentSearch")
+    	public String studentSearch(Student student, Model model, Integer studentID) {
+
+        	List<Student> foundStudent = sService.findStudent(studentID);
+        	model.addAttribute("foundStudent", foundStudent);
+
+        	return "studentSearch";
+    }
 
 }
 
