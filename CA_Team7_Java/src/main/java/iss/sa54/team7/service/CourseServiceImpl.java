@@ -17,7 +17,12 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	@Transactional
 	public ArrayList<Course> findCoursesByLectID(Integer lectID) {
-		return courseRepo.findCoursesByLecturerID(lectID);
+		ArrayList<Course> list = findAllCourses();
+		ArrayList<Course> list2 = new ArrayList<Course>();
+		for (var Course : list) {
+		    list2.add(Course);
+		}
+		return list2;
 	}
 
 	@Override
@@ -55,10 +60,5 @@ public class CourseServiceImpl implements CourseService {
 	public void removeCoursebyId(Integer courseID){
 		courseRepo.deleteById(courseID);
 	};
-	/* * @Override
-	 * 
-	 * @Transactional public ArrayList<Course> findCoursesByID(Integer courseID) {
-	 * return courseRepo.findById(courseID); }
-	 */
-
+	
 }

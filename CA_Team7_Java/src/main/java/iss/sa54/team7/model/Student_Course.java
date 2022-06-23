@@ -1,42 +1,34 @@
 package iss.sa54.team7.model;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import lombok.Data;
-import lombok.NoArgsConstructor;  
+import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @NoArgsConstructor
-@Entity
 public class Student_Course {  
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "courseID")
-    private Course course;
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "studentID")
-    private Student student;
-
-    private String grade;
-    private int score;
-    
-
-    public Student_Course(Student student, String grade, int score) {
-        this.student = student;
-        this.grade = grade;
-        this.score = score;
+	
+	//@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	//@JoinColumn(name = "courseid") 
+    //private Course course;
+	private int courseid;
+	//@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)	  
+	//@JoinColumn(name = "studentid")    
+    //private Student student;
+    private int studentid;	
+    private String grade;   
+	
+	public Student_Course(int courseid, int studentid, String grade) {
+	super();
+	this.courseid = courseid;
+	this.studentid = studentid;
+	this.grade = grade;	}
         
-    }
-
-   
 }

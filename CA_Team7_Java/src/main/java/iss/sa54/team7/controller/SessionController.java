@@ -37,7 +37,7 @@ public class SessionController {
 		return "forward:/home/viewLoginForm";
 	}
 	
-	@PostMapping("/authenticate")
+	/*@PostMapping("/authenticate")
 	public String authenticate(@ModelAttribute("user") User user, HttpSession session, Model model) {
 		
 		if (user.getPassword() == null || 
@@ -65,7 +65,7 @@ public class SessionController {
 			else
 				nextPage = "forward:/student";
 			
-			session.setAttribute("userSession", userFromDb.getUserId());
+			session.setAttribute("userSession", userFromDb.getUserid());
 		}
 		else {
 			model.addAttribute("wrong", "true");
@@ -73,7 +73,7 @@ public class SessionController {
 		}
 		
 		return nextPage;
-	}
+	}*/
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
