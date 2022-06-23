@@ -51,5 +51,14 @@ public class StudentController {
 		model.addAttribute("Student_Course", courselist);
 		return "student";
 	}
+	
+	//This will show all the courses from Schools
+	
+	@RequestMapping("/findAllCourse")
+	public String FindAllCourse(Model model){
+		List<Course> courselist = cService.findAllCourses();
+		model.addAttribute("courses", courselist);
+		return "courses";
+	}
 
 }
