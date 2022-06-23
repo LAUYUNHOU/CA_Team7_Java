@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: html_head"/>
+</head>
+<body> 
+
+<div><h2>Search for Student</h2></div>
+        <form th:object="${student}" method="post">
+            <div>
+                <label for="studentID">Student ID: </label>
+                <input type="text" name="studentID" th:value="*{studentID}">
+                <input type="submit" value="Search">
+            </div>
+        </form>
+
+        <table>
+            <tr>
+                <th>StudentID</th>
+                <th>FirstMidName</th>
+                <th>LastName</th>
+                <th>gpa</th>
+            </tr>
+            <tr th:each="student : ${foundStudent}">
+                <td><span th:text="${student.StudentID}" >StudentID</span></td>
+                <td><span th:text="${student.FirstMidName}" >Name</span></td>
+                <td><span th:text="${student.LastName}" >Last Name</span></td>
+                <td><span th:text="${student.gpa}" >GPA</span></td>
+            </tr>
+
+        </table>
+
+</body>
+</html>
