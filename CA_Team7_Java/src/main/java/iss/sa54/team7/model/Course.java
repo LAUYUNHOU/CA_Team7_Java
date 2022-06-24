@@ -1,10 +1,15 @@
 package iss.sa54.team7.model;
 import java.time.LocalDate;
-import javax.persistence.Column;
+import java.util.List;
+
+import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,15 +29,16 @@ public class Course {
     private LocalDate courseEndDate;
     @Column(name="courseunit")
     private int courseUnit;
-    @Column(name ="maxSize")
+    @Column(name ="maxsize")
     private int maxSize;
-    @Column(name ="lecturerID")
+    @Column(name ="lecturerid")
     private int lecturerid;
-
-	/*
-	 * @OneToMany(mappedBy = "course", cascade = CascadeType.ALL) private
-	 * List<Student_Course> studentCourses;
-	 */
+    
+    @ManyToMany
+    @JoinTable(name="student_course", 
+    		joinColumns = {@JoinColumn(name = "course_courseid")},
+    		inverseJoinColumns = {@JoinColumn(name="student_studentid")})
+	private List<Student> sc;
 
 	public Course(String courseName, LocalDate courseStartDate, LocalDate courseEndDate, int courseUnit, int maxSize,
 			int lecturerid) {
