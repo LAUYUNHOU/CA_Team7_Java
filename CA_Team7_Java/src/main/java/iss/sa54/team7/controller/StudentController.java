@@ -30,6 +30,7 @@ public class StudentController {
     private CourseService cService;
     @Autowired
     private StudentCourseService scService;
+
     
 	/*
 	 * @GetMapping("/courses") public String viewCoursesTaught(Model model, Integer
@@ -74,11 +75,52 @@ public class StudentController {
 		}
 		model.addAttribute("coursesByStudent", list2);
 		
+		// compute GPA then save to DB
+		 double calcGpa = calculateGPA(studentID);
+		 Student thisStu = sService.findStudent(studentID);
+		 thisStu.setGpa(calcGpa);
+		 sService.editStudent(thisStu);
+		
 		// for printing personal student details and gpa
-		Student stu = sService.findStudent(studentID);
-		model.addAttribute("studentdetails", stu);
+		model.addAttribute("studentdetails", thisStu);
 		return "performance";
 	}
 	
+	public double calculateGPA (Integer studentid) {
+		List<Student_Course> sclist = scService.findAllStudentCourses();
+		double totalscore = 0;
+		int totalunit = 0;
+		
+		for (Student_Course item : sclist) {
+			if (item.getStudentid() == studentid) {
+				// calc total course unit
+				Integer cID = item.getCourseid();
+				int courseUnit = cService.findCourse(cID).getCourseUnit();
+				totalunit += courseUnit;
+				
+				// calc total score based on grade conversion
+				if (item.getGrade() == "A") {
+					totalscore += 5.0;
+				}
+				else if (item.getGrade() == "B") {
+					totalscore += 4.0;
+				}
+				else if (item.getGrade() == "C") {
+					totalscore += 3.0;
+				}
+				else if (item.getGrade() == "D") {
+					totalscore += 2.0;
+				}
+				else if (item.getGrade() == "E") {
+					totalscore += 1.0;
+				}
+				else {
+					totalscore += 0;
+				}
+			}
+		}
+		// calc GPA
+		return totalscore / totalunit;
+	}
 	
 }
