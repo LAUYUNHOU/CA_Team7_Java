@@ -11,7 +11,7 @@
 <body>
 	
 <h1> Course List</h1>     
-<table>
+<table class="table table-striped table-responsive-md">
 	 <tr>
 	   <th>Course ID</th>
 	   <th>Course Name</th>
@@ -21,11 +21,11 @@
 	   <th>View</th>
 	 </tr>
 	 <tr th:each="course:${courses}">
-	   <td th:text="*{courseid}">ID</td> 
-	   <td th:text="*{coursename}">Name</td>
-	   <td th:text="*{#dates.format(coursestartdate, 'dd-MM-yyyy')}">Start Date</td>
-	   <td th:text="*{#dates.format(courseenddate, 'dd-MM-yyyy')}">End Date</td>
-	   <td th:text="*{courseunit}">Course Unit(s)</td>
+	   <td th:text="${course.courseid}">ID</td> 
+	   <td th:text="${course.coursename}">Name</td>
+	   <td th:text="${#dates.format(coursestartdate, 'dd-MM-yyyy')}">Start Date</td>
+	   <td th:text="${#dates.format(courseenddate, 'dd-MM-yyyy')}">End Date</td>
+	   <td th:text="${course.courseunit}">Course Unit(s)</td>
 	   <td><a href="enrolment.html" th:href="@{'/lecturer/courses/'+*{courseid}}">View</a></td>
 	</tr>
 </table>
