@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Student_Course {  
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private int scid;
 	
 	//@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	//@JoinColumn(name = "courseid") 

@@ -17,8 +17,7 @@ import iss.sa54.team7.service.StudentService;;
 
 
 @Controller
-@RequestMapping(value="/student")
-
+@RequestMapping("/student")
 public class StudentController {
 	@Autowired
 	private StudentService sService;
@@ -43,7 +42,7 @@ public class StudentController {
 	
 	//This will show all the courses from Schools
 	
-	@RequestMapping("/findAllCourse")
+	@RequestMapping("/courses")
 	public String FindAllCourse(Model model){
 		List<Course> courselist = cService.findAllCourses();
 		model.addAttribute("courses", courselist);

@@ -29,11 +29,14 @@ public class UserServiceImpl implements UserService {
 		  return list; 
 		  }
 		  
-	/*@Override
+	@Override
 	@Transactional 
-	 public User findUserByUsername(String name) { 
-		 return urepo.findUserByUsername(name);
-		 }*/
+	 public User findUserByUsername(String name) {
+		User user = urepo.findUserByUsername(name);
+		if (user == null)
+			return null;
+		 return user;
+		 }
 
 	@Override
 	@Transactional

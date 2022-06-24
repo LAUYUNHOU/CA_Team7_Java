@@ -37,7 +37,7 @@ public class SessionController {
 		return "forward:/home/viewLoginForm";
 	}
 	
-	/*@PostMapping("/authenticate")
+	@PostMapping("/authenticate")
 	public String authenticate(@ModelAttribute("user") User user, HttpSession session, Model model) {
 		
 		if (user.getPassword() == null || 
@@ -61,9 +61,9 @@ public class SessionController {
 			if (role == RoleType.ADMIN)
 				nextPage = "forward:/admin";
 			else if(role == RoleType.LECTURER)
-				nextPage = "forward:/lecturer";
+				nextPage = "forward:/lecturer/courses";
 			else
-				nextPage = "forward:/student";
+				nextPage = "forward:/student/courses";
 			
 			session.setAttribute("userSession", userFromDb.getUserid());
 		}
@@ -73,11 +73,11 @@ public class SessionController {
 		}
 		
 		return nextPage;
-	}*/
+	}
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		session.removeAttribute("currentUser");
+		session.removeAttribute("userSession");
 		session.invalidate();
 		return "index";
 	}
