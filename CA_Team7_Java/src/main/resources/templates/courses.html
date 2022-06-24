@@ -22,10 +22,10 @@
 	 </tr>
 	 <tr th:each="course:${courses}">
 	   <td th:text="${course.courseid}">ID</td> 
-	   <td th:text="${course.coursename}">Name</td>
+	   <td th:text="${course.courseName}">Name</td>
 	   <td th:text="${#dates.format(coursestartdate, 'dd-MM-yyyy')}">Start Date</td>
 	   <td th:text="${#dates.format(courseenddate, 'dd-MM-yyyy')}">End Date</td>
-	   <td th:text="${course.courseunit}">Course Unit(s)</td>
+	   <td th:text="${course.courseUnit}">Course Unit(s)</td>
 	   <td><a href="enrolment.html" th:href="@{'/lecturer/courses/'+*{courseid}}">View</a></td>
 	</tr>
 </table>
