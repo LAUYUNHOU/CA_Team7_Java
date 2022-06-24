@@ -1,8 +1,15 @@
 package iss.sa54.team7.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +26,9 @@ public class Student {
     @Column(name="gpa")
     private double gpa;
 
-    //@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)	  
-	//@JoinColumn(name = "studentid")
-    //private Student_Course studentCourses;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)	  
+	@JoinColumn(name = "studentid")
+    private List<Student_Course> studentCourses;
     
     @OneToOne
     private User user;

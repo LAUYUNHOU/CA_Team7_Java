@@ -1,11 +1,16 @@
 package iss.sa54.team7.model;
 
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import lombok.Data;
 
 @Data
@@ -28,10 +33,10 @@ public class Course {
     @Column(name ="lecturerID")
     private int lecturerid;
 
-	/*
-	 * @OneToMany(mappedBy = "course", cascade = CascadeType.ALL) private
-	 * List<Student_Course> studentCourses;
-	 */
+	
+	  @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+	  private List<Student_Course> studentCourses;
+	 
 
 	public Course(String courseName, Date courseStartDate, Date courseEndDate, int courseUnit, int maxSize,
 			int lecturerid) {

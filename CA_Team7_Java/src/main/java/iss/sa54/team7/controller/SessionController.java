@@ -23,7 +23,7 @@ public class SessionController {
 	@Autowired
 	UserService uservice;
 	
-	@RequestMapping("/viewLoginForm")
+	@RequestMapping("/login")
 	public String viewLoginForm(Model model) {
 		
 		User user = new User();
