@@ -1,4 +1,5 @@
 package iss.sa54.team7.controller;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -64,8 +65,14 @@ public class StudentController {
 	public String viewPerformance(Model model, HttpSession session) {
 		// for printing all courses and respective grade of this student
 		Integer studentID = (Integer) session.getAttribute("userSession");
-		List<Student_Course>list = scService.findCoursesByStudentID(studentID);
-		model.addAttribute("coursesByStudent", list);
+		List<Student_Course> list1 = scService.findAllStudentCourses();
+		ArrayList<Student_Course> list2 = new ArrayList<Student_Course>();
+		for (Student_Course item : list1) {
+			if (item.getStudentid() == studentID) {
+				list2.add(item);
+			}
+		}
+		model.addAttribute("coursesByStudent", list2);
 		
 		// for printing personal student details and gpa
 		Student stu = sService.findStudent(studentID);

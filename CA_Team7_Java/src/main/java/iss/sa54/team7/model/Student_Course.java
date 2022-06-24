@@ -30,8 +30,8 @@ public class Student_Course {
 	
 	public Student_Course(int courseid, int studentid, String grade) {
 	super();
-	this.courseid = courseid;
-	this.studentid = studentid;
+	this.courseid=courseid;
+	this.studentid=studentid;
 	this.grade = grade;	}
         
 }

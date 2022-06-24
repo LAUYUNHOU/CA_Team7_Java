@@ -17,7 +17,7 @@
 	 	<p>Start date - <span th:text="${#temporals.format(coursestartdate, 'yyyy-MM-dd')}"/></p>
 		<p>End date - <span th:text="${#temporals.format(courseenddate, 'yyyy-MM-dd')}"/></p>
 	 	<p>Course unit(s) - <span th:text="${course.courseUnit}"/></p>
-	 	<td><a href="enrolment.html" th:href="@{'/student/courses/'+*{courseid}}">Enrol</a></td>
+	 	<td><a href="enrolment.html" th:href="@{'/student/courses/'+*{courseid}+'enrol'}">Enrol</a></td>
 	</tr>
 </table>
 	<!-- Optional JavaScript -->

@@ -13,6 +13,6 @@ public interface StudentCourseService {
 	Student_Course editCourse(Student_Course StudentCourse);
 	//ArrayList<Student_Course> getAllStudentsGradesByCourseID(Integer courseID);
 	//public ArrayList<Student_Course> findAllStudentsByCourseID(Integer cID);
-	public ArrayList<Student_Course> findCoursesByStudentID(Integer studentID);
+	//public ArrayList<Student_Course> findCoursesByStudentID(Integer studentID);
 	//public Student_Course getScByCourseAndStudentID(Integer courseID, Integer studentID);
 }
