@@ -21,12 +21,12 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 		return studentcourseRepo.getStudentCourseByCourseAndStudentID(courseID, studentID);
 	}*/
 	
-	/*@Override
+	@Override
 	@Transactional
 	public ArrayList<Student_Course> findCoursesByStudentID(Integer studentID) {
 		return studentcourseRepo.findCoursesByStudentID(studentID);
 	}
-	@Override
+	/*@Override
 	@Transactional
 	public ArrayList<Student_Course> findAllStudentsByCourseID(Integer cID) {
 		return studentcourseRepo.findAllStudentsByCourseID(cID);
