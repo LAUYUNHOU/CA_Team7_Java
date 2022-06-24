@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout.html :: html_head"/>
+<body>
+
+<h2>View Performance</h2> 
+<table style = "border: 1;">
+<tr>
+	   <th>CourseID</th>
+	   <th>Course Name</th>
+	   <th>Grade</th>
+	 </tr>
+	 <tr th:each="course:${coursesByStudent}">
+	   <td th:text="${student_course.courseid}">Course ID</td> 
+	   <td th:text="${course.courseName}">Course Name</td>
+   	   <td th:text="${student_course.grade}">Grade</td>
+
+	</tr>
+</table>
+
+<br /><br /><br />
+
+<div style = "padding: 10px">
+<h4>Student Name: <span th:text="${studentdetails.name}"></span></h4>
+<h4>Student ID: <span th:text="${studentdetails.studentid}"></span></h4>
+<h4>GPA: <span th:text="${studentdetails.gpa}"></span></h4>
+</div>
+
+</body>
+</html>
