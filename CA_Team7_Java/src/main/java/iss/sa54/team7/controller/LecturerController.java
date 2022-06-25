@@ -32,11 +32,12 @@ public class LecturerController {
     @Autowired
     private StudentCourseService scService;
 	
-	@GetMapping("/courses")
-	public String viewCoursesTaught(Model model, Integer lectID){
-		List<Course> courselist = cService.findCoursesByLectID(lectID);
+	@RequestMapping("/courses")
+	public String FindAllCourse(Model model, HttpSession session){
+		Integer lecid = (Integer) session.getAttribute("userSession");
+		List<Course> courselist = cService.findCoursesByLectID(lecid);
 		model.addAttribute("courses", courselist);
-		return "courses";
+		return "leccourses";
 	}
 
 	/*
