@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:fragment="html_head" id="html_head">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,28 +10,28 @@
     <title>Login Page</title>
 </head>
 <body>
+	<div th:replace="fragments/layout :: nav"></div>
 	<header>LOG IN</header>
 	
-	<form th:action="@{/home/authenticate}" th:object="${user}" method="POST">
-		 <div>
+     <!-- login -->
+ 
+   <form class="border container p-3 col-4" th:action="@{/home/authenticate}" th:object="${user}" method="POST">
+	<div>
 		 	<span style="color: red;" th:if="${isNull != null}">Please provide both username and password</span>
 		 	<span style="color: red;" th:if="${wrong != null}">Wrong password</span>
 		 	<span style="color: red;" th:if="${exist != null}">Username incorrect/not found</span>
 		 </div>
-		 <table>
-	       		<tr>
-	                <td>Username:</td>
-	                <td><input type="text" placeholder="Enter your name" th:field="*{username}"/></td>
-	            </tr>
-	            <tr>
-	                <td>Password:</td>
-	                <td><input type="password" placeholder="Enter your password" th:field="*{password}"/></td>
-	            </tr>
-	            <tr>
-	                <td colspan="2"><button>LOG IN</button></td>
-	            </tr>
-	    </table>
-    </form>
+       <div class="form-group">
+       <label for="username">UserName</label>
+       <input type="text" class="form-control" th:field="*{username}" placeholder="Enter Username">
+       </div>
+       <div class="form-group">
+       <label for="exampleInputPassword1">Password</label>
+       <input type="password" class="form-control" th:field="*{password}" placeholder="Password">
+       </div>
+       <button type="submit" class="btn btn-primary mx-auto">Login</button>
+   </form>
+   <!-- login -->
 
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
