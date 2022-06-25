@@ -15,17 +15,27 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 	@Resource
 	private StudentCourseRepo studentcourseRepo;
 
+	/*@Override
+	@Transactional
+	public Student_Course getScByCourseAndStudentID(Integer courseID, Integer studentID){
+		return studentcourseRepo.getStudentCourseByCourseAndStudentID(courseID, studentID);
+	}*/
+	
+	/*@Override
+	@Transactional
+	public ArrayList<Student_Course> findCoursesByStudentID(Integer studentID) {
+		return studentcourseRepo.findCoursesByStudentID(studentID);
+	}
 	@Override
 	@Transactional
-	public ArrayList<Student_Course> findCoursesByStuID(Integer stuID) {
-		return studentcourseRepo.findCoursesByStuID(stuID);
-	}
-	
-	@Override
+	public ArrayList<Student_Course> findAllStudentsByCourseID(Integer cID) {
+		return studentcourseRepo.findAllStudentsByCourseID(cID);
+	}*/
+	/*@Override
 	@Transactional
 	public ArrayList<Student_Course> getAllStudentsGradesByCourseID(Integer courseID) {
 		return studentcourseRepo.getAllGradesByCourseID(courseID);
-	}
+	}*/
 
 	@Override
 	@Transactional 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import iss.sa54.team7.model.RoleType;
 import iss.sa54.team7.model.User;
 import iss.sa54.team7.repo.UserRepo;
 
@@ -27,30 +28,21 @@ public class UserServiceImpl implements UserService {
 		  ArrayList<User>list = (ArrayList<User>) urepo.findAll(); 
 		  return list; 
 		  }
-	 
-	  
-	/*
-	 * @Override
-	 * 
-	 * @Transactional public User findUserByUsername(String name) { User user =
-	 * urepo.findUserByUsername(name); if (user == null) return null; return user; }
-	 */
-	  
+		  
 	@Override
-	public User findUserByUsername(String name) {
+	@Transactional 
+	 public User findUserByUsername(String name) {
 		User user = urepo.findUserByUsername(name);
 		if (user == null)
 			return null;
-		
-		return user;
-	}
+		 return user;
+		 }
 
 	@Override
 	@Transactional
 	public User findUser(Integer id) {
 		return urepo.findById(id).orElse(null);
-
-	}
+		}
 
 	@Override
 	@Transactional
@@ -64,15 +56,17 @@ public class UserServiceImpl implements UserService {
 		urepo.delete(user);
 	}
 
-	/*
-	 * @Override
-	 * 
-	 * @Transactional public Optional<User> findRoleByUserID(Integer userID) {
-	 * return urepo.findById(userID); }
-	 */
-	
+	@Override
+	@Transactional
 	public User editUser(User user) {
 		return urepo.saveAndFlush(user);
 	}
+	
+	/*
+	 * @Override
+	 * 
+	 * @Transactional public ArrayList<User> findUsersByRole(RoleType role){
+	 * ArrayList<User> list = urepo.findUsersByRoleType(role); return list; }
+	 */
 
 }

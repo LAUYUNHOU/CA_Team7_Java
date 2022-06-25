@@ -1,0 +1,1 @@
+int time = int.Parse(DateTime.Now.ToString)
