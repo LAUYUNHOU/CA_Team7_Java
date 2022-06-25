@@ -23,8 +23,8 @@
 	 <tr th:each="course:${courses}">
 	   <td th:text="${course.courseid}">ID</td> 
 	   <td th:text="${course.courseName}">Name</td>
-	   <td th:text="${#temporals.format(coursestartdate, 'yyyy-MM-dd')}">Start Date</td>
-	   <td th:text="${#temporals.format(courseenddate, 'yyyy-MM-dd')}">End Date</td>
+	   <td th:text="${#temporals.format(course.coursestartdate, 'yyyy-MM-dd')}">Start Date</td>
+	   <td th:text="${#temporals.format(course.courseenddate, 'yyyy-MM-dd')}">End Date</td>
 	   <td th:text="${course.courseUnit}">Course Unit(s)</td>
 	   <td><a href="enrolment.html" th:href="@{'/student/courses/'+*{courseid}}">Enrol</a></td>
 	</tr>
