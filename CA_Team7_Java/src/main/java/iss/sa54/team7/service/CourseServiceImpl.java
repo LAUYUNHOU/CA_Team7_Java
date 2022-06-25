@@ -20,8 +20,11 @@ public class CourseServiceImpl implements CourseService {
 		ArrayList<Course> list = findAllCourses();
 		ArrayList<Course> list2 = new ArrayList<Course>();
 		for (var Course : list) {
-		    list2.add(Course);
+		   if (Course.getLecturerid()==lectID) {
+			   list2.add(Course);
+			   }		   
 		}
+		System.out.println(list2);
 		return list2;
 	}
 
