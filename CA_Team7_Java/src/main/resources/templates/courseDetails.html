@@ -9,15 +9,17 @@
     <title>Student - Course Enrolment</title>
 </head>
 <body>
+    <div th:replace="fragments/layout :: nav"></div>
 	
 <h2>Course Enrolment for <span th:text="${coursedetails.courseName}"/></h2>     
 <table class="table table-striped table-responsive-md">
-	 	<p>Course ID - <span th:text="${course.courseid}"/></p>
-	 	<p>Course name - <span th:text="${course.courseid}"/></p>
-	 	<p>Start date - <span th:text="${#temporals.format(coursestartdate, 'yyyy-MM-dd')}"/></p>
-		<p>End date - <span th:text="${#temporals.format(courseenddate, 'yyyy-MM-dd')}"/></p>
-	 	<p>Course unit(s) - <span th:text="${course.courseUnit}"/></p>
-	 	<td><a href="enrolment.html" th:href="@{'/student/courses/'+*{courseid}+'enrol'}">Enrol</a></td>
+    <tr>
+	 	<p>Course ID: <span th:text="${coursedetails.courseid}"/></p>
+	 	<p>Course name: <span th:text="${coursedetails.courseName}"/></p>
+	 	<p>Start date: <span th:text="${#temporals.format(coursedetails.courseStartDate, 'yyyy-MM-dd')}"/></p>
+		<p>End date: <span th:text="${#temporals.format(coursedetails.courseEndDate, 'yyyy-MM-dd')}"/></p>
+	 	<p>Course unit(s): <span th:text="${coursedetails.courseUnit}"/></p>
+	 	<td><a href="enrolment.html" th:href="@{'/student/courses/'+*{courseid}+'/enrol'}">Enrol now!</a></td>
 	</tr>
 </table>
 	<!-- Optional JavaScript -->

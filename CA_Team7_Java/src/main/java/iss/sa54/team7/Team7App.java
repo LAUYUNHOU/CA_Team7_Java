@@ -31,7 +31,7 @@ public class Team7App {
 	   };
 	   
 		
-		  @Bean public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+		  /*@Bean public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		  return args ->{SCryptPasswordEncoder encoder = new SCryptPasswordEncoder();
 		  String hashedPassword = encoder.encode("mmm"); String hashedPassword1 =
 		  encoder.encode("ttt"); String hashedPassword2 = encoder.encode("jjj");
@@ -48,7 +48,7 @@ public class Team7App {
 		  
 		  Course c1 = new Course("Java Spring",dt1,dt2, 3, 50, 2); Course c2 = new
 		  Course("Python ML", dt3,dt4, 4, 40, 2); cService.createCourse(c1);
-		  cService.createCourse(c2);}; }
+		  cService.createCourse(c2);};}*/
 		 }
 
 	

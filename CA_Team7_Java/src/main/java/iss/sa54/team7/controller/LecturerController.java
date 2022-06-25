@@ -32,11 +32,12 @@ public class LecturerController {
     @Autowired
     private StudentCourseService scService;
 	
-	@GetMapping("/courses")
-	public String viewCoursesTaught(Model model, Integer lectID){
-		List<Course> courselist = cService.findCoursesByLectID(lectID);
+	@RequestMapping("/courses")
+	public String FindAllCourse(Model model, HttpSession session){
+		Integer lecid = (Integer) session.getAttribute("userSession");
+		List<Course> courselist = cService.findCoursesByLectID(lecid);
 		model.addAttribute("courses", courselist);
-		return "courses";
+		return "leccourses";
 	}
 
 	/*
@@ -52,12 +53,18 @@ public class LecturerController {
 	}*/
 	
 	@GetMapping("/courses/{courseID}/enrolment")
-	public String populateGrades(Model model) {
+	public String populateGrades(Model model, @PathVariable("courseID") Integer cID) {
 		List<String> options = new ArrayList<String>();
 		options.add("A"); options.add("B");
 		options.add("C"); options.add("D");
 		options.add("E"); options.add("F");
 		model.addAttribute("gradeoptions", options);
+		
+		List<Student_Course> sc = (List<Student_Course>) scService.findStudentCourse(cID);
+		model.addAttribute("students", sc);
+		
+		
+		
 		return "enrolment";
 	}
 

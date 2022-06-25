@@ -11,7 +11,7 @@
 </head>
 <body>
 	<header>LOG IN</header>
-	
+	<div>></div>
 	<form th:action="@{/home/authenticate}" th:object="${user}" method="POST">
 		 <div>
 		 	<span style="color: red;" th:if="${isNull != null}">Please provide both username and password</span>

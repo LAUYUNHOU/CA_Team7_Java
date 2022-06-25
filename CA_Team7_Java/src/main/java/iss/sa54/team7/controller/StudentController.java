@@ -53,7 +53,7 @@ public class StudentController {
 		return "courses";
 	}
 	
-	@RequestMapping("/courses/{courseID}/")
+	@RequestMapping("/courses/{courseID}")
 	public String studentEnrol(Model model, @PathVariable("courseID") Integer cID) {
 		Course coursedetails = cService.findCourse(cID);
 		model.addAttribute("coursedetails", coursedetails);
@@ -61,11 +61,11 @@ public class StudentController {
 	}
 	
 	//saveEnrol method
-	
 	@RequestMapping("/viewgrade")
 	public String viewPerformance(Model model, HttpSession session) {
 		// for printing all courses and respective grade of this student
 		Integer studentID = (Integer) session.getAttribute("userSession");
+		
 		List<Student_Course> list1 = scService.findAllStudentCourses();
 		ArrayList<Student_Course> list2 = new ArrayList<Student_Course>();
 		for (Student_Course item : list1) {
@@ -76,13 +76,13 @@ public class StudentController {
 		model.addAttribute("coursesByStudent", list2);
 		
 		// compute GPA then save to DB
-		 double calcGpa = calculateGPA(studentID);
 		 Student thisStu = sService.findStudent(studentID);
+		 double calcGpa = calculateGPA(studentID);
 		 thisStu.setGpa(calcGpa);
 		 sService.editStudent(thisStu);
-		
 		// for printing personal student details and gpa
 		model.addAttribute("studentdetails", thisStu);
+			
 		return "performance";
 	}
 	

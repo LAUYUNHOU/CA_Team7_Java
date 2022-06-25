@@ -41,7 +41,13 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	@Transactional
 	public Student findStudent(Integer studentID) {
-		return srepo.findById(studentID).orElse(null);
+		Student s = srepo.findByStudentid(studentID);
+		if (s == null) {
+			return null;
+		}
+		else{
+		return s;
+		} 
 	}
 		
 	@Override

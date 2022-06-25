@@ -9,16 +9,15 @@
 	<table style = "border: 1;">;	
 		<tr>
 			<th>StudentID</th>
-			<th>FirstMidName</th>
-			<th>LastName</th>
-			<th>CourseGrade</th>
+			<th>Name</th>
+			<th>Course grade</th>
+			<th>Enter grade</th>
 			<th> </th>
 		</tr>
 		<tr th:each= "student : ${students}">
-			<td th:text = "*{studentID}">StudentID</td>
-			<td th:text = "${student.firstMidName}">Name</td> 
-			<td th:text = "${student.lastName}">LastName</td>
-			<td th:text = "${gradelist.grade}">
+			<td th:text = "${student.studentid}">StudentID</td>
+			<td th:text = "${student.studentname}">Name</td> 
+			<td th:text = "${student.grade}">Grade</td>
 			<td>
 			<form th:action="@{/courses/{courseID}/grade}" method="post" th:object="${gradeform}"> 
 				<select class="form-control" id="gradeselect" name="gradeselect">
