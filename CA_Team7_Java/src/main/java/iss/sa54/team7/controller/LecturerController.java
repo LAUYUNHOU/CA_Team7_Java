@@ -1,7 +1,10 @@
 package iss.sa54.team7.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 //import javax.validation.Valid;
@@ -56,8 +59,8 @@ public class LecturerController {
 	@GetMapping("/courses/{courseID}/enrolment")
 	public String populateGrades(Model model, @PathVariable("courseID") Integer courseID) {
 		List<Student_Course> sc = (List<Student_Course>) scService.findAllStudentCourses();
-		ArrayList<Student_Course> list = new ArrayList<Student_Course>();
-		for (Student_Course item:list) {
+		Set<Student_Course> list = new HashSet<Student_Course>();
+		for (Student_Course item:sc) {
 			if (item.getCourseid()==courseID) {
 				list.add(item);
 			}
@@ -70,9 +73,12 @@ public class LecturerController {
 	}
 	
 	@GetMapping("/courses/{courseid}/grade/{studentid}")
-	public String showStudentGradePage(@PathVariable("courseid") Course courseid, @PathVariable("studentid") Student_Course studentid, Model model) {
-		model.addAttribute("course", courseid);
-		model.addAttribute("sc", studentid);
+	public String showStudentGradePage(@PathVariable("courseid") Integer courseid, @PathVariable("studentid") Integer studentid, Model model) {
+		Course c = cService.findCourse(courseid);
+		model.addAttribute("course", c);
+		Student_Course sc = scService.findStudentCourse(studentid);
+		model.addAttribute("sc", sc);
+		System.out.println(sc);
 		return "gradeStudentPage";
 	}
 	

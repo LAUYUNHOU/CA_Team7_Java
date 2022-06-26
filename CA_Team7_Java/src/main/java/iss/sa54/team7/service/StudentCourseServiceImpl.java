@@ -55,8 +55,8 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 
 	@Override
 	@Transactional
-	public Student_Course findStudentCourse(Integer courseID) {
-		return studentcourseRepo.findById(courseID).orElse(null);
+	public Student_Course findStudentCourse(Integer courseid) {
+		return studentcourseRepo.findByCourseid(courseid);
 	}
 
 	@Override

@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/layout.html :: html_head"/>
 <body>
-	
+
+<div class="container">
 <h1> Student Details</h1>     
 <table>
 	 <tr>
@@ -52,6 +53,6 @@
 	   <td th:text="${#dates.format(course.courseEndDate, 'dd-MM-yyyy')}">End Date</td>
 </table>	
 	
-	
+</div>
 </body>
 </html>

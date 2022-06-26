@@ -66,6 +66,12 @@ public class SessionController {
 				nextPage = "forward:/student/courses";
 			
 			session.setAttribute("userSession", userFromDb.getUserid());
+			if (role.equals(RoleType.STUDENT)) {
+				session.setAttribute("sessionRole", "student");
+			}
+			else {
+				session.setAttribute("sessionRole", "lecturer");
+			}
 		}
 		else {
 			model.addAttribute("wrong", "true");

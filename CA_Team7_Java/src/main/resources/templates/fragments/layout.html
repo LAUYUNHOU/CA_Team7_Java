@@ -16,17 +16,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
      <ul class="navbar-nav mr-auto">
        <li class="nav-item active">
-         <a class="nav-link" href="#">one</a>
+         		<div th:if="*{sessionRole == 'student'}"><a class="nav-link" th:href="@{/student/viewgrade}">View academic performance</a></div>
+         		<div th:if="*{sessionRole == 'lecturer'}"><a class="nav-link" th:href="@{/lecturer/courses}">View teaching course(s)</a></div>
+       		
        </li>
        <li class="nav-item">
-         <a class="nav-link" href="#">two</a>
-       </li>
-       <li class="nav-item dropdown">
-         <a class="nav-link" href="#">three</a>
+         
+         		<div th:if="*{sessionRole == 'student'}"><a class="nav-link" th:href="@{/student/courses}">Enrol in new courses</a></div>
+         		<div th:if="*{sessionRole == 'lecturer'}"><a class="nav-link" th:href="#">View student performance</a></div>
+       		
        </li>
      </ul>
      
-     <span class="ml-auto"><a th:href="@{/home/logout}" >Logout</a></span>
+     <span class="ml-auto"><a style=color:black href="@{/home/logout}" >Logout</a></span>
    </div>
  </nav>
   <!-- Optional JavaScript -->

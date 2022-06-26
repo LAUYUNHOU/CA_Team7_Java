@@ -10,16 +10,17 @@
     <title>Login Page</title>
 </head>
 <body>
-	
+
 	<div th:replace="fragments/layout :: nav"></div>
 	<form th:action="@{/home/authenticate}" th:object="${user}" method="POST">
+	<div class="container">
 		 <div>
 		 	<span style="color: red;" th:if="${isNull != null}">Please provide both username and password</span>
 		 	<span style="color: red;" th:if="${wrong != null}">Wrong password</span>
 		 	<span style="color: red;" th:if="${exist != null}">Username incorrect/not found</span>
 		 </div>
 		 <table>
-	       		<tr>
+	       		<tr style = "padding: 10px">
 	                <td>Username:</td>
 	                <td><input type="text" placeholder="Enter your name" th:field="*{username}"/></td>
 	            </tr>
@@ -27,12 +28,13 @@
 	                <td>Password:</td>
 	                <td><input type="password" placeholder="Enter your password" th:field="*{password}"/></td>
 	            </tr>
-	            <tr>
+	            <tr style = "padding: 10px">
 	                <td colspan="2"><button>LOG IN</button></td>
 	            </tr>
 	    </table>
     </form>
-
+    <img alt="" th:src="@{/image/imgimg1.jpg}" width="60%"/>
+	</div>
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

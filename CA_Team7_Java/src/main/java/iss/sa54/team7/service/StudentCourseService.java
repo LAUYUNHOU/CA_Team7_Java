@@ -9,8 +9,9 @@ import iss.sa54.team7.model.*;
 
 public interface StudentCourseService {
 
+	Student_Course findStudentCourse(Integer courseid);
 	ArrayList<Student_Course>findAllStudentCourses();
-	Student_Course findStudentCourse(Integer courseID);
+
 	Student_Course createCourse(Student_Course StudentCourse);
 	Student_Course editCourse(Student_Course StudentCourse);
 	//ArrayList<Student_Course> getAllStudentsGradesByCourseID(Integer courseID);

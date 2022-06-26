@@ -10,17 +10,15 @@
 </head>
 <body>
     <div th:replace="fragments/layout :: nav"></div>
-	
-<h2>Student grade for <span th:text="${course.courseName}"/></h2>     
-<table class="table table-striped table-responsive-md">
-    <tr>
-	 	<p >Course ID: <span th:text="${course.courseid}"/></p>
-	 	<p>Course name: <span th:text="${course.courseName}"/></p>
+
+<div class="container">
+<h2>Student grade for <span th:text="${course.courseid}"/></h2>     
+
+	 	<p>Course Name: <span th:text="${course.courseName}"/></p>
 	 	<p>Start date: <span th:text="${#temporals.format(course.courseStartDate, 'yyyy-MM-dd')}"/></p>
 		<p>End date: <span th:text="${#temporals.format(course.courseEndDate, 'yyyy-MM-dd')}"/></p>
 	 	<p>Course unit(s): <span th:text="${course.courseUnit}"/></p>
-	 	<br>
-	 	<br>
+		<p></p>
 	 	<p>Student ID: <span th:text="${sc.studentid}"/></p>
 	 	<p>Course grade: <span th:text="${sc.grade}"/></p>
 	 	<p>
@@ -35,7 +33,7 @@
 	 			</select>
 	 		</form>
 	 	</p>
-
+</div>
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

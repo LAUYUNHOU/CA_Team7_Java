@@ -10,6 +10,8 @@ import iss.sa54.team7.model.*;
 
 public interface StudentCourseRepo extends JpaRepository<Student_Course, Integer> {
 	
+	//ArrayList<Student_Course> findByCourseid(Integer courseid);
+	Student_Course findByCourseid(Integer courseid);
 	/*
 	 * @Query("SELECT sc Student_Course sc WHERE sc.courseid = :cID") public
 	 * ArrayList<Student_Course> findAllStudentsByCourseID(@Param("cID")Integer

@@ -36,10 +36,10 @@ public class Team7App {
 
 	   };
 	   
-		 /* @Bean public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+		  @Bean public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		  return args ->{
-				
-			  User user1 = new User("Ray", "rrr", "Ray", RoleType.STUDENT);	
+			  
+			  /* User user1 = new User("Ray", "rrr", "Ray", RoleType.STUDENT);	
 			  User u = uService.createUser(user1);
 			  Student s1 = new Student(u);
 			  sService.createStudent(s1);
@@ -56,13 +56,21 @@ public class Team7App {
 			  
 			  Course c1 = new Course("Java Spring",dt1,dt2, 3, 50, 2); Course c2 = new
 			  Course("Python ML", dt3,dt4, 4, 40, 2); cService.createCourse(c1);
-			  cService.createCourse(c2);}; }*/
-				 
-									  
-							//Student_Course sc1 = new Student_Course(6,1,"A");
-							//scService.createCourse(sc1);
-									 //};
-				;
+			  cService.createCourse(c2);
+			  
+			  
+			  Student_Course sc1 = scService.findStudentCourse(4);
+			  Student_Course sc2 = scService.findStudentCourse(5);
+			  sc1.setGrade("A");
+			  sc2.setGrade("B");
+			  scService.editCourse(sc2); scService.editCourse(sc1);*/
+			  };
+			  
+			  
+		  };
+		  
+				
+							
 		 }
 
 	

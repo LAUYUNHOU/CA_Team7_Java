@@ -1,4 +1,5 @@
 package iss.sa54.team7.controller;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,12 +69,15 @@ public class StudentController {
 	public String viewPerformance(Model model, HttpSession session) {
 		// for printing all courses and respective grade of this student
 		Integer studentID = (Integer) session.getAttribute("userSession");
-		
 		List<Student_Course> list1 = scService.findAllStudentCourses();
 		ArrayList<Student_Course> list2 = new ArrayList<Student_Course>();
+		ArrayList<Course> list3 = new ArrayList<Course>();
 		for (Student_Course item : list1) {
 			if (item.getStudentid() == studentID) {
 				list2.add(item);
+				Integer id = item.getCourseid();
+				Course c = cService.findCourse(id);
+				list3.add(c);
 			}
 		}
 		model.addAttribute("coursesByStudent", list2);
@@ -85,37 +89,38 @@ public class StudentController {
 		 sService.editStudent(thisStu);
 		// for printing personal student details and gpa
 		model.addAttribute("studentdetails", thisStu);
-			
+		model.addAttribute("course", list3);
 		return "performance";
 	}
 	
 	public double calculateGPA (Integer studentid) {
+		
 		List<Student_Course> sclist = scService.findAllStudentCourses();
 		double totalscore = 0;
-		int totalunit = 0;
-		
+		int totalunit = 0;		
 		for (Student_Course item : sclist) {
 			if (item.getStudentid() == studentid) {
-				// calc total course unit
+				// calc total course unit				
 				Integer cID = item.getCourseid();
+				
 				int courseUnit = cService.findCourse(cID).getCourseUnit();
 				totalunit += courseUnit;
 				
 				// calc total score based on grade conversion
-				if (item.getGrade() == "A") {
-					totalscore += 5.0;
+				if (item.getGrade().equals("A")) {
+					totalscore += 5.0*courseUnit;
 				}
-				else if (item.getGrade() == "B") {
-					totalscore += 4.0;
+				else if (item.getGrade().equals("B")) {
+					totalscore += 4.0*courseUnit;
 				}
-				else if (item.getGrade() == "C") {
-					totalscore += 3.0;
+				else if (item.getGrade().equals("C")) {
+					totalscore += 3.0*courseUnit;
 				}
-				else if (item.getGrade() == "D") {
-					totalscore += 2.0;
+				else if (item.getGrade().equals("D")) {
+					totalscore += 2.0*courseUnit;
 				}
-				else if (item.getGrade() == "E") {
-					totalscore += 1.0;
+				else if (item.getGrade().equals("E")) {
+					totalscore += 1.0*courseUnit;
 				}
 				else {
 					totalscore += 0;
@@ -123,10 +128,10 @@ public class StudentController {
 			}
 		}
 		// calc GPA
-		return totalscore / totalunit;
+		return totalscore/totalunit;
 	}
 	
-	// NEED TO FIX + courseDetails.html
+	
 	@RequestMapping("/courses/{courseid}/enrol")
     public String studentEnrol(@PathVariable("courseid") int courseID, HttpSession session, Model model) {
         Integer studentId = (Integer) session.getAttribute("userSession");
