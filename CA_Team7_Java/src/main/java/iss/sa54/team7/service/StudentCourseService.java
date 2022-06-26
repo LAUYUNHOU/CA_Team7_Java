@@ -2,6 +2,8 @@ package iss.sa54.team7.service;
 
 import java.util.ArrayList;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import iss.sa54.team7.model.*;
 
 
@@ -15,4 +17,5 @@ public interface StudentCourseService {
 	//public ArrayList<Student_Course> findAllStudentsByCourseID(Integer cID);
 	//public ArrayList<Student_Course> findCoursesByStudentID(Integer studentID);
 	//public Student_Course getScByCourseAndStudentID(Integer courseID, Integer studentID);
-}
+	//public void studentEnrollCourse(Integer courseId,Integer studentID);
+    }

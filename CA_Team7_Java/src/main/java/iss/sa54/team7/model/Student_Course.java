@@ -33,5 +33,12 @@ public class Student_Course {
 	this.courseid=courseid;
 	this.studentid=studentid;
 	this.grade = grade;	}
+	
+	public Student_Course(int courseid,int studentid){
+        super();
+        this.courseid=courseid;
+        this.studentid=studentid;
+        grade = "";
+    }
         
 }

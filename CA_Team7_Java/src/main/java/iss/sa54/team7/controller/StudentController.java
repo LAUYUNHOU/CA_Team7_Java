@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import iss.sa54.team7.model.Course;
 import iss.sa54.team7.model.Student;
 import iss.sa54.team7.model.Student_Course;
+import iss.sa54.team7.repo.StudentCourseRepo;
 import iss.sa54.team7.service.CourseService;
 import iss.sa54.team7.service.StudentCourseService;
 import iss.sa54.team7.service.StudentService;;
@@ -30,6 +31,8 @@ public class StudentController {
     private CourseService cService;
     @Autowired
     private StudentCourseService scService;
+    @Autowired
+    private StudentCourseRepo screpo;
 
     
 	/*
@@ -53,8 +56,8 @@ public class StudentController {
 		return "courses";
 	}
 	
-	@RequestMapping("/courses/{courseID}")
-	public String studentEnrol(Model model, @PathVariable("courseID") Integer cID) {
+	@RequestMapping("/courses/{courseid}")
+	public String studentEnrol(Model model, @PathVariable("courseid") Integer cID) {
 		Course coursedetails = cService.findCourse(cID);
 		model.addAttribute("coursedetails", coursedetails);
 		return "courseDetails";
@@ -123,4 +126,14 @@ public class StudentController {
 		return totalscore / totalunit;
 	}
 	
+	
+	@RequestMapping("/courses/{courseid}/enrol")
+    public String studentEnrol(@PathVariable("courseid") Integer cID, HttpSession session, Model model) {
+        Integer studentId = (Integer) session.getAttribute("userSession");
+        Student_Course sc = new Student_Course(cID, studentId);
+        screpo.saveAndFlush(sc);
+        Course c = cService.findCourse(cID);
+        model.addAttribute("enrolledcourse", c);
+        return "courseEnrolledConfirmed";
+    }
 }

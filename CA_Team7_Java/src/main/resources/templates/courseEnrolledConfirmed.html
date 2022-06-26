@@ -11,15 +11,15 @@
 <body>
     <div th:replace="fragments/layout :: nav"></div>
 	
-<h2>Course Enrolment for <span th:text="${coursedetails.courseName}"/></h2>     
+<h2>Course Enrolment for <span th:text="${enrolledcourse.courseName}"/></h2>     
 <table class="table table-striped table-responsive-md">
     <tr>
-	 	<p>Course ID: <span th:text="${coursedetails.courseid}"/></p>
-	 	<p>Course name: <span th:text="${coursedetails.courseName}"/></p>
-	 	<p>Start date: <span th:text="${#temporals.format(coursedetails.courseStartDate, 'yyyy-MM-dd')}"/></p>
-		<p>End date: <span th:text="${#temporals.format(coursedetails.courseEndDate, 'yyyy-MM-dd')}"/></p>
-	 	<p>Course unit(s): <span th:text="${coursedetails.courseUnit}"/></p>
-	 	<td><a th:href="@{'/student/courses/'+${coursedetails.courseid}+'/enrol'}">Enrol now!</a></td>
+	 	<p >Course ID: <span th:text="${enrolledcourse.courseid}"/></p>
+	 	<p>Course name: <span th:text="${enrolledcourse.courseName}"/></p>
+	 	<p>Start date: <span th:text="${#temporals.format(enrolledcourse.courseStartDate, 'yyyy-MM-dd')}"/></p>
+		<p>End date: <span th:text="${#temporals.format(enrolledcourse.courseEndDate, 'yyyy-MM-dd')}"/></p>
+	 	<p>Course unit(s): <span th:text="${enrolledcourse.courseUnit}"/></p>
+	 	<td><a th:href="@{'/student/courses/'}">Course enrolled confirmed! Click to return</a></td>
 	</tr>
 </table>
 	<!-- Optional JavaScript -->

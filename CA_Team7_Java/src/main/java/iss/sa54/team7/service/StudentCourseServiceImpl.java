@@ -14,7 +14,14 @@ import iss.sa54.team7.repo.StudentCourseRepo;
 public class StudentCourseServiceImpl implements StudentCourseService {
 	@Resource
 	private StudentCourseRepo studentcourseRepo;
-
+	
+	/*
+	 * @Override
+	 * @Transactional public void studentEnrollCourse(Integer courseId,Integer
+	 * studentID){ Student_Course sc=new Student_Course(courseId, studentID);
+	 * studentcourseRepo.saveAndFlush(sc);}
+	 */
+        
 	/*@Override
 	@Transactional
 	public Student_Course getScByCourseAndStudentID(Integer courseID, Integer studentID){
