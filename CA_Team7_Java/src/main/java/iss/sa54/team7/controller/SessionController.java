@@ -86,7 +86,7 @@ public class SessionController {
 		SCryptPasswordEncoder encoder = new SCryptPasswordEncoder();
 		return encoder.matches(user.getPassword(), userFromDb.getPassword());
 	}
-	
 }
+	
 
 

@@ -52,19 +52,39 @@ public class LecturerController {
 	 
 	}*/
 	
+	// HERERE
 	@GetMapping("/courses/{courseID}/enrolment")
-	public String populateGrades(Model model, @PathVariable("courseID") Integer cID) {
-		List<String> options = new ArrayList<String>();
-		options.add("A"); options.add("B");
-		options.add("C"); options.add("D");
-		options.add("E"); options.add("F");
-		model.addAttribute("gradeoptions", options);
+	public String populateGrades(Model model, @PathVariable("courseID") Integer courseID) {
+		List<Student_Course> sc = (List<Student_Course>) scService.findAllStudentCourses();
+		ArrayList<Student_Course> list = new ArrayList<Student_Course>();
+		for (Student_Course item:list) {
+			if (item.getCourseid()==courseID) {
+				list.add(item);
+			}
+		}
+		model.addAttribute("students", list);
 		
-		List<Student_Course> sc = (List<Student_Course>) scService.findStudentCourse(cID);
-		model.addAttribute("students", sc);
-		
-		
-		
+		Course c = cService.findCourse(courseID);
+		model.addAttribute("cou", c);
+		return "enrolment";
+	}
+	
+	@GetMapping("/courses/{courseid}/grade/{studentid}")
+	public String showStudentGradePage(@PathVariable("courseid") Course courseid, @PathVariable("studentid") Student_Course studentid, Model model) {
+		model.addAttribute("course", courseid);
+		model.addAttribute("sc", studentid);
+		return "gradeStudentPage";
+	}
+	
+	@PostMapping("/courses/{courseid}/grade/{studentid}")
+	public String updateStudentGrade(@PathVariable("courseid") Integer courseid, @PathVariable("studentid") Integer studentid, @ModelAttribute("stugrade") String stugrade) {
+		ArrayList<Student_Course>list = scService.findAllStudentCourses();
+		for (Student_Course sc : list) {
+			if (sc.getCourseid()==courseid && sc.getStudentid()==studentid) {
+				sc.setGrade(stugrade);
+				scService.editCourse(sc);
+			}
+		}
 		return "enrolment";
 	}
 

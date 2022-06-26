@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,9 +60,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public User editUser(User user) {
-		return urepo.saveAndFlush(user);
+		SCryptPasswordEncoder encoder = new SCryptPasswordEncoder();
+        String hashedPassword = encoder.encode(user.getPassword());
+        User u1 = user;
+        u1.setPassword(hashedPassword);
+		return urepo.saveAndFlush(u1);
 	}
-	
+	@Override
+	@Transactional
+	public void removeUserById(Integer userID){
+		urepo.deleteById(userID);		
+	};
 	/*
 	 * @Override
 	 * 

@@ -126,13 +126,13 @@ public class StudentController {
 		return totalscore / totalunit;
 	}
 	
-	
+	// NEED TO FIX + courseDetails.html
 	@RequestMapping("/courses/{courseid}/enrol")
-    public String studentEnrol(@PathVariable("courseid") Integer cID, HttpSession session, Model model) {
+    public String studentEnrol(@PathVariable("courseid") int courseID, HttpSession session, Model model) {
         Integer studentId = (Integer) session.getAttribute("userSession");
-        Student_Course sc = new Student_Course(cID, studentId);
+        Student_Course sc = new Student_Course(courseID, studentId);
         screpo.saveAndFlush(sc);
-        Course c = cService.findCourse(cID);
+        Course c = cService.findCourse(courseID);
         model.addAttribute("enrolledcourse", c);
         return "courseEnrolledConfirmed";
     }

@@ -23,13 +23,15 @@ public class Student_Course {
 	//@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     //private Course course;
 	private int courseid;
+   //private Student student;	
 	//@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)	  
-    //private Student student;
+ 
     private int studentid;	
-    private String grade;   
+    private String grade; 
 	
 	public Student_Course(int courseid, int studentid, String grade) {
 	super();
+	
 	this.courseid=courseid;
 	this.studentid=studentid;
 	this.grade = grade;	}

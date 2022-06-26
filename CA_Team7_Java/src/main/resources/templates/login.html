@@ -10,7 +10,7 @@
     <title>Login Page</title>
 </head>
 <body>
-	<header>LOG IN</header>
+	
 	<div th:replace="fragments/layout :: nav"></div>
 	<form th:action="@{/home/authenticate}" th:object="${user}" method="POST">
 		 <div>

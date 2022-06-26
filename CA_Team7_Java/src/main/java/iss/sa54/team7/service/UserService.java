@@ -15,6 +15,7 @@ public interface UserService {
 	public User createUser(User user);
 	void removeUser(User user);
 	public User editUser(User user);
+	public void removeUserById(Integer courseID);
 ///public ArrayList<User> findUsersByRole(RoleType role);
 	public User findUserByUsername(String name);
 

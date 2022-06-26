@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="html_head" id="html_head">
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>Lecturer - Courses</title>
+    <title>Student - Course Enrolment</title>
 </head>
 <body>
-	<div th:replace="fragments/layout :: nav"></div>
-
-	<h2><em th:utext="'Hello '+ ${user.username}"></em></h2>
-
-<h2>Classes Taught</h2>     
+    <div th:replace="fragments/layout :: nav"></div>
+	
+<h2>Student grade for <span th:text="${course.courseName}"/></h2>     
 <table class="table table-striped table-responsive-md">
-	 <tr>
-	   <th>Course ID</th>
-	   <th>Course Name</th>
-	   <th>Size</th>
-	   <th>Start Date</th>
-	   <th>End Date</th>
-	   <th>Class enrolment</th>
+    <tr>
+	 	<p >Course ID: <span th:text="${course.courseid}"/></p>
+	 	<p>Course name: <span th:text="${course.courseName}"/></p>
+	 	<p>Start date: <span th:text="${#temporals.format(course.courseStartDate, 'yyyy-MM-dd')}"/></p>
+		<p>End date: <span th:text="${#temporals.format(course.courseEndDate, 'yyyy-MM-dd')}"/></p>
+	 	<p>Course unit(s): <span th:text="${course.courseUnit}"/></p>
+	 	<br>
+	 	<br>
+	 	<p>Student ID: <span th:text="${sc.studentid}"/></p>
+	 	<p>Course grade: <span th:text="${sc.grade}"/></p>
+	 	<p>
+	 		<form th:action="'/courses/'+${course.courseid}+'/grade/'+{sc.studentid}" method="post">
+	 			<select th:field="*{stugrade}">
+	 				<option th:value="'A'" th:text="A"></option>
+	 				<option th:value="'B'" th:text="B"></option>
+	 				<option th:value="'C'" th:text="C"></option>
+	 				<option th:value="'D'" th:text="D"></option>
+	 				<option th:value="'E'" th:text="E"></option>
+	 				<option th:value="'F'" th:text="F"></option>
+	 			</select>
+	 		</form>
+	 	</p>
 
-	 </tr>
-	 <tr th:each="course:${courses}">
-	   <td th:text="${course.courseid}">ID</td> 
-	   <td th:text="${course.courseName}">Name</td>
-	   <td th:text="${course.maxSize}">Size</td>	   
-	   <td th:text="${#temporals.format(course.courseStartDate, 'yyyy-MM-dd')}">Start Date</td>
-	   <td th:text="${#temporals.format(course.courseEndDate, 'yyyy-MM-dd')}">End Date</td>
-	   <td> <a href="enrolment.html" th:href="@{'/lecturer/courses/'+*{course.courseid}+'/enrolment'}">View class</a></td>
-	</tr>
-</table>
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

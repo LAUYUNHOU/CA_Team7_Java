@@ -34,11 +34,11 @@ public class Course {
     @Column(name ="lecturerid")
     private int lecturerid;
     
-    @ManyToMany
-    @JoinTable(name="student_course", 
-    		joinColumns = {@JoinColumn(name = "course_courseid")},
-    		inverseJoinColumns = {@JoinColumn(name="student_studentid")})
-	private List<Student> sc;
+    //@ManyToMany
+    //@JoinTable(name="student_course", 
+    		//joinColumns = {@JoinColumn(name = "course_courseid")},
+    		//inverseJoinColumns = {@JoinColumn(name="student_studentid")})
+	//private List<Student> sc;
 
 	public Course(String courseName, LocalDate courseStartDate, LocalDate courseEndDate, int courseUnit, int maxSize,
 			int lecturerid) {

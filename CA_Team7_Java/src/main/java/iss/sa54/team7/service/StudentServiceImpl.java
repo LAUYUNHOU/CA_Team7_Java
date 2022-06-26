@@ -36,7 +36,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	@Transactional
-	public Student editStudent(Student student) {
+	public Student editStudent(Student student) {		
 		return srepo.saveAndFlush(student);
 	}
 

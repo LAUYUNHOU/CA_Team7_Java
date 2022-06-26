@@ -23,17 +23,22 @@ public class Student {
     @Column(name="gpa")
     private double gpa;
 
-    @ManyToMany(mappedBy="sc")
-    private List<Course> courses;
+    //@ManyToMany(mappedBy="sc")
+    //private List<Course> courses;
     
     @OneToOne
     private User user;
 	
-	public Student(String name, User user) {
+	public Student(User user) {
 		super();		
-		this.name = name;
+		this.name = user.getName();
 		this.user = user;
 		this.studentid = user.getUserid();
+	} 
+	public Student(int studentid, String name) {
+		super();
+		this.studentid = studentid;
+		this.name = name;
 	} 
       
 }

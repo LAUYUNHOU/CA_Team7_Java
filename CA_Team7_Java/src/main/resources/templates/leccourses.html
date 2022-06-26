@@ -30,7 +30,7 @@
 	   <td th:text="${course.maxSize}">Size</td>	   
 	   <td th:text="${#temporals.format(course.courseStartDate, 'yyyy-MM-dd')}">Start Date</td>
 	   <td th:text="${#temporals.format(course.courseEndDate, 'yyyy-MM-dd')}">End Date</td>
-	   <td> <a href="enrolment.html" th:href="@{'/courses/'+*{courseID}+'/enrolment'}">View class</a></td>
+	   <td> <a href="enrolment.html" th:href="@{'/lecturer/courses/'+*{course.courseid}+'/enrolment'}">View class</a></td>
 	</tr>
 </table>
 	<!-- Optional JavaScript -->
